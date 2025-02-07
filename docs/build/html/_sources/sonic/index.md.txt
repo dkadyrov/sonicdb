@@ -1,0 +1,17 @@
+# User Guide
+
+The SONICDB package delivers two main classes: `sonic` and `audio`.
+
+```{toctree}
+:hidden:
+
+sonic
+audio
+extending
+```
+
+## SONIC
+
+The `sonic` class is the main class that manages the database connection and provides methods for creating, updating, and deleting records in the database. 
+
+

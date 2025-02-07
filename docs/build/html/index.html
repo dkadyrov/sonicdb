@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Audio" href="audio.html" />
 
     <!-- Generated with Sphinx 8.0.2 and Furo 2024.08.06 -->
-        <title>sonicdb documentation</title>
+        <title>SONICDB documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=302659d7" />
@@ -166,7 +166,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="#"><div class="brand">sonicdb  documentation</div></a>
+      <a href="#"><div class="brand">SONICDB  documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -178,7 +178,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -190,7 +190,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="#">
   
   
-  <span class="sidebar-brand-text">sonicdb  documentation</span>
+  <span class="sidebar-brand-text">SONICDB  documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -198,7 +198,11 @@
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="audio.html">Audio guide</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/dkadyrov/sonicdb/releases">Changelog</a></li>
+</ul>
+
 </div>
 </div>
 
@@ -231,7 +235,7 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
@@ -241,25 +245,39 @@
 <h1>SONICDB<a class="headerlink" href="#sonicdb" title="Link to this heading">¶</a></h1>
 <div class="toctree-wrapper compound">
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>---
-start-after: &lt;!-- badges-begin --&gt;
-end-before: &lt;!-- badges-end --&gt;
----
-</pre></div>
-</div>
+<section id="about">
+<h2>About<a class="headerlink" href="#about" title="Link to this heading">¶</a></h2>
+<p>The Sound Organization and Network Integration for Collection/Collaboration (SONIC) Python package leverages relational database management systems to store and manage acoustic data and its associated metadata.</p>
+<p>It was developed to address the lack of a standardized method of organizing audio files for research purposes, especially in the context of algorithm development and machine learning.</p>
+<p>The package is designed to be flexible and extendable, allowing users to retrofit it to their use cases while maintaining foundational models and methods for managing audio data. It uses widely used standard libraries including SQLAlchemy, Pandas, Numpy, and Librosa. Currently it emphasizes using SQLite as the database backend, but it can be extended to use other relational database management systems.</p>
+</section>
 <section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Link to this heading">¶</a></h2>
+<section id="requirements">
+<h3>Requirements<a class="headerlink" href="#requirements" title="Link to this heading">¶</a></h3>
+<p>The SONICDB Python package requires Python 3.12 or later. It also depends on the following packages:</p>
+<ul class="simple">
+<li><p>SQLAlchemy</p></li>
+<li><p>Pandas</p></li>
+<li><p>Numpy</p></li>
+<li><p>Librosa</p></li>
+<li><p>Pydub</p></li>
+<li><p>SQLAlchemy-Utils</p></li>
+<li><p>Soundfile</p></li>
+<li><p>Scipy</p></li>
+<li><p>Matplotlib</p></li>
+</ul>
 </section>
-<section id="features">
-<h2>Features<a class="headerlink" href="#features" title="Link to this heading">¶</a></h2>
+<section id="installation">
+<h3>Installation<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h3>
+<p>SONICDB is available on PyPi and can be installed using pip:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>sonicdb
+</pre></div>
+</div>
 </section>
-<section id="faq">
-<h2>FAQ<a class="headerlink" href="#faq" title="Link to this heading">¶</a></h2>
-<section id="what-is-this-project-about">
-<h3>What is this project about?<a class="headerlink" href="#what-is-this-project-about" title="Link to this heading">¶</a></h3>
-</section>
-<section id="what-makes-this-project-different-from-other-python-templates">
-<h3>What makes this project different from other Python templates?<a class="headerlink" href="#what-makes-this-project-different-from-other-python-templates" title="Link to this heading">¶</a></h3>
+<section id="documentation">
+<h3>Documentation<a class="headerlink" href="#documentation" title="Link to this heading">¶</a></h3>
+<p>The documentation for the SONIC Python package can be found <a class="reference internal" href="#/guide/guide"><span class="xref myst">here</span></a>.</p>
 </section>
 </section>
 </section>
@@ -269,7 +287,15 @@ end-before: &lt;!-- badges-end --&gt;
       <footer>
         
         <div class="related-pages">
-          
+          <a class="next-page" href="audio.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Audio</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
           
         </div>
         <div class="bottom-of-page">
@@ -289,33 +315,8 @@ end-before: &lt;!-- badges-end --&gt;
         
       </footer>
     </div>
-    <aside class="toc-drawer">
+    <aside class="toc-drawer no-toc">
       
-      
-      <div class="toc-sticky toc-scroll">
-        <div class="toc-title-container">
-          <span class="toc-title">
-            On this page
-          </span>
-        </div>
-        <div class="toc-tree-container">
-          <div class="toc-tree">
-            <ul>
-<li><a class="reference internal" href="#">SONICDB</a><ul>
-<li><a class="reference internal" href="#usage">Usage</a></li>
-<li><a class="reference internal" href="#features">Features</a></li>
-<li><a class="reference internal" href="#faq">FAQ</a><ul>
-<li><a class="reference internal" href="#what-is-this-project-about">What is this project about?</a></li>
-<li><a class="reference internal" href="#what-makes-this-project-different-from-other-python-templates">What makes this project different from other Python templates?</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
-          </div>
-        </div>
-      </div>
       
       
     </aside>

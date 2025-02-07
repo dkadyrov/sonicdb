@@ -1,0 +1,7 @@
+# Extending SONICDB
+
+The SONICDB package provides foundational models and methods for managing audio data. It is designed to be flexible and extendable, allowing users to retrofit it to their use cases while maintaining the core functionality of the package.
+
+## Example 1: SPIDB 
+
+The Stored Product Insect Database (SPIDB) is a package that extends SONICDB to manage acoustic data for stored product insects. It adds new models and methods to SONICDB to manage the acoustic data collected from testing stored product insects in a variety of materials and environments using the Acoustic Stored Product Insect Detection System (A-SPIDS) and the Microwave Stored Product Detection System (M-SPIDS) developed by the Sensor Technology and Applied Science (STAR) Center at Stevens Institute of Technology for the Cross-Border Threat Screening and Supply Chain Security Center of Excellence (CBTS).

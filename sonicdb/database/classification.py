@@ -3,6 +3,7 @@ from sqlalchemy import DateTime
 from sqlalchemy import ForeignKey
 from sqlalchemy import Integer
 from sqlalchemy import String
+from sqlalchemy import Float
 from sqlalchemy.orm import relationship
 
 from .base import Base
@@ -22,7 +23,7 @@ class Classification(Base):  # type: ignore
     """int: classifier identification. Can reference id in an external lookup table """
     # TODO maybe have a table for different classifiers
 
-    classification = Column(Integer)
+    classification = Column(Float)
     """int: classification encoding. Accessed using :func:`~starpy.sad.database.Classification.class_encoding`"""
     # TODO maybe have a table for different classification encodings
 

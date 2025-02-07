@@ -7,7 +7,6 @@ from datetime import timedelta
 import librosa
 import matplotlib.dates as mdates
 import matplotlib.pyplot as plt
-import noisereduce as nr
 import numpy as np
 import pandas as pd
 import soundfile as sf
@@ -15,6 +14,7 @@ from pydub import AudioSegment
 from scipy import signal
 
 from sonicdb import utilities
+from mpl_toolkits.axes_grid1 import make_axes_locatable
 
 
 np.seterr(divide="ignore")
@@ -60,13 +60,16 @@ class Audio:  # pragma: no cover
 
         self.end = self.start + timedelta(seconds=len(self.audio) / self.sample_rate)
 
-        self.data["datetime"] = pd.date_range(
-            start=self.start, end=self.end, periods=len(self.audio)
-        )
-
         self.data["signal"] = self.audio
         self.data["seconds"] = self.data.index / self.sample_rate
         self.data["ms"] = self.data["seconds"] * 1000
+        self.data["datetime"] = pd.date_range(
+            start=self.start,
+            end=(self.start + timedelta(seconds=self.data.seconds.max())),
+            periods=len(self.audio),
+        )
+        # rearrange columns
+        self.data = self.data[["datetime", "seconds", "ms", "signal"]]
 
     def add_data(self, filepath):
         """
@@ -183,7 +186,7 @@ class Audio:  # pragma: no cover
 
         try:
             self.audio = librosa.resample(
-                self.audio, orig_sr=self.sample_rate, subject_sr=sample_rate
+                self.audio, orig_sr=self.sample_rate, target_sr=sample_rate
             )
         except Exception as e:
             print(f"Error: {e}")
@@ -252,12 +255,11 @@ class Audio:  # pragma: no cover
         cmap="jet",
         aspect="auto",
         time_format="datetime",
+        fig=None,
         ax=None,
     ):
         if ax is None:
             fig, ax = plt.subplots()
-        else:
-            fig = None
 
         time, frequency, Pxx = self.spectrogram(
             window=window,
@@ -320,7 +322,10 @@ class Audio:  # pragma: no cover
 
         if showscale == "right":
             cbar = fig.colorbar(
-                axi, location="right", orientation="vertical", ticks=[zmin, zmax]
+                axi,
+                location="right",
+                orientation="vertical",
+                ticks=[zmin, round(zmin + (zmax - zmin) / 2), zmax],
             )
             cbar.ax.set_ylabel("Power [dB]")
         elif showscale == "top":
@@ -328,11 +333,13 @@ class Audio:  # pragma: no cover
                 axi,
                 location="top",
                 orientation="horizontal",
-                ticks=[zmin, zmax],
+                ticks=[zmin, round(zmin + (zmax - zmin) / 2), zmax],
                 pad=0.1,
             )
-            cbar.ax.set_ylabel("Power [dB]", rotation="horizontal")
-            cbar.ax.yaxis.set_label_coords(0.5, 1.5)
+            # cbar.ax.set_ylabel("Power [dB]", rotation="horizontal")
+            # set the label to be on the top of the colorbar
+            cbar.ax.xaxis.set_label_position("top")
+            cbar.ax.set_xlabel("Power [dB]")
 
         if fig:
             return fig, ax
@@ -600,36 +607,6 @@ class Audio:  # pragma: no cover
             self.audio = audio
         else:
             return list(audio)
-
-    def reduce_noise(
-        self,
-        nfft=2048,
-        hop_length=512,
-        time_mask_smooth_ms=200,
-        time_constant_s=3,
-        freq_mask_smooth_hz=50,
-        replace=False,
-    ):
-        """
-        Reduces noise in audio
-        """
-
-        data = nr.reduce_noise(
-            y=self.data.signal,  # audio data
-            sr=self.sample_rate,  # sample rate
-            prop_decrease=0.98,  # decrease noise by 98% (not an entirely binary mask)
-            n_fft=nfft,  # number of FFT bins
-            hop_length=hop_length,  # number of samples between FFT windows
-            time_mask_smooth_ms=time_mask_smooth_ms,  # mask smoothing parameter
-            time_constant_s=time_constant_s,  # time smoothing parameter
-            freq_mask_smooth_hz=freq_mask_smooth_hz,  # mask smoothing parameter
-        )
-
-        if replace:
-            self.data.signal = data
-            self.audio = data
-
-        return data
 
     def envelope(self, overwrite=False):
         envelope = np.abs(signal.hilbert(self.data.signal))

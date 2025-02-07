@@ -1,6 +1,8 @@
 from sqlalchemy import Column
 from sqlalchemy import ForeignKey
 from sqlalchemy import Integer
+from sqlalchemy import String
+from sqlalchemy import Float
 from sqlalchemy.orm import relationship
 
 from .base import Base
@@ -16,6 +18,12 @@ class Channel(Base):  # type: ignore
 
     number = Column(Integer)
     """int: Channel number of the sensor"""
+
+    type_class = Column(String)
+    """str: Type of sensor"""
+
+    gain = Column(Float)
+    """int: Gain of the sensor"""
 
     sensor_id = Column(Integer, ForeignKey("sensor.id"))
     """int: Sensor database ID"""

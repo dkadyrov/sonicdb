@@ -6,7 +6,7 @@ from datetime import timedelta
 
 import librosa
 import pandas as pd
-from dateutil.parser import parser
+from dateutil.parser import parse
 
 
 audiofiles = [
@@ -79,17 +79,15 @@ def read_datetime(string: str) -> datetime:  # pragma: no cover
     """
 
     try:
-        dt = datetime.strptime(string, "%Y_%m_%d")
+        return datetime.strptime(string, "%Y_%m_%d")
     except Exception:
         try:
-            dt = datetime.strptime(string, "%Y_%m_%d_%H_%M_%S.%f")
+            return datetime.strptime(string, "%Y_%m_%d_%H_%M_%S.%f")
         except Exception:
             try:
-                dt = datetime.strptime(string, "%Y_%m_%d_%H_%M_%S")
+                return datetime.strptime(string, "%Y_%m_%d_%H_%M_%S")
             except Exception:
-                dt = parser.parse(string, fuzzy=True)
-
-    return dt
+                return parse(timestr=string, fuzzy=True)
 
 
 def metadata(filepath: str, extended=False) -> dict:  # pragma: no cover
@@ -140,7 +138,7 @@ def metadata(filepath: str, extended=False) -> dict:  # pragma: no cover
                 metadata["record_number"] = None
 
             try:
-                metadata["start"] = datetime.read_datetime(metadata["filename"][:23])
+                metadata["start"] = read_datetime(metadata["filename"][:23])
             except Exception:
                 metadata["start"] = None
 

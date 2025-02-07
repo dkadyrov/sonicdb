@@ -1,0 +1,30 @@
+# SONIC
+
+## Initializing the Database
+
+The database is initialized using the following command:
+
+```python
+from sonicdb import sonic 
+
+db = sonic.Database("database_name.db")
+```
+
+This creates a SQLite 
+
+## Models 
+
+The following models make up the database.
+
+### File 
+
+
+### Sensor
+
+### Channel
+
+### Event
+
+### Sample
+
+### Classification

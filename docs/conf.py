@@ -1,6 +1,6 @@
 """Sphinx configuration."""
 
-project = "sonicdb"
+project = "SONICDB"
 author = "Daniel Kadyrov"
 copyright = "2024, Daniel Kadyrov"
 extensions = [
@@ -13,3 +13,8 @@ extensions = [
 autodoc_typehints = "description"
 html_theme = "furo"
 master_doc = "index"
+myst_enable_extensions = [
+    "colon_fence",
+    "deflist",
+    "substitution",
+]

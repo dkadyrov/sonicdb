@@ -5,7 +5,7 @@ import pathlib
 import librosa
 import numpy as np
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import sessionmaker, scoped_session
 from sqlalchemy_utils import database_exists
 
 from sonicdb import audio
@@ -20,17 +20,13 @@ class Database:  # pragma: no cover
 
     def __init__(self, db: str):
         # TODO Add support for other databases
-
-        # if classification is True:
-        #     from sonicdb.database.classification import Classification
-
-        self.engine = create_engine(f"sqlite:///{db}")
+        self.engine = create_engine(f"sqlite:///{db}?check_same_thread=False")
         if database_exists(self.engine.url):
             Base.metadata.bind = self.engine
         else:
             Base.metadata.create_all(self.engine)
         DBSession = sessionmaker(bind=self.engine, autoflush=False)
-
+        DBSession = scoped_session(DBSession)
         self.session = DBSession()
         """
         Inherits the DBSession class from SQLAlchemy. `Available here <https://docs.sqlalchemy.org/en/14/orm/session.html>`_.
@@ -106,7 +102,7 @@ class Database:  # pragma: no cover
 
         data = []
         for file in files:
-            file.filepath = pathlib.PurePath(self.session.directory, file.filepath)
+            filepath = pathlib.PurePath(self.session.directory, file.filepath)
             offset = (start - file.start).total_seconds()
 
             if offset < 0:
@@ -117,17 +113,17 @@ class Database:  # pragma: no cover
 
             if duration < 0:
                 if offset >= file.duration:
-                    data.extend(librosa.load(file.filepath, sr=sample_rate)[0].tolist())
+                    data.extend(librosa.load(filepath, sr=sample_rate)[0].tolist())
                 else:
                     data.extend(
-                        librosa.load(file.filepath, offset=offset, sr=sample_rate)[
+                        librosa.load(filepath, offset=offset, sr=sample_rate)[
                             0
                         ].tolist()
                     )
             else:
                 data.extend(
                     librosa.load(
-                        file.filepath,
+                        filepath,
                         offset=offset,
                         duration=file.duration - duration - offset,
                         sr=sample_rate,
@@ -136,7 +132,10 @@ class Database:  # pragma: no cover
 
             start = file.end
 
-        data.extend([0.0] * int(length - len(data)))
+        if len(data) < length:
+            data.extend([0.0] * int(length - len(data)))
+        if len(data) > length:
+            data = data[:int(length)]
 
         a = audio.Audio(
             audio=np.asarray(data), sample_rate=sample_rate, start=file_start
