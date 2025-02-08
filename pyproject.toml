@@ -36,6 +36,9 @@ docs-build-latex = "sphinx-build -M latex docs/. docs/build"
 [tool.hatch.metadata]
 allow-direct-references = true
 
+[tool.hatch.version]
+path = "sonicdb/__init__.py"
+
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
