@@ -27,7 +27,7 @@ class Audio:  # pragma: no cover
     """
 
     def __init__(self, filepath=None, audio=None, sample_rate=None, start=None):
-        if filepath:
+        if filepath is not None:
             self.filepath = filepath
             self.filename = os.path.basename(filepath)
             self.audio, self.sample_rate = librosa.load(filepath)
@@ -988,3 +988,41 @@ def echo(data, sample_rate, delay=0.1, decay=0.5):  # pragma: no cover
     echo[: len(data)] += data
 
     return echo
+
+def spectral_subtraction(signal, noise, scaling_factor=1.0):
+    """
+    Perform spectral subtraction with optional scaling of the noise spectrum.
+
+    Parameters:
+        signal (array-like): The input signal.
+        noise (array-like): The noise signal.
+        scaling_factor (float): A factor to scale the noise spectrum before subtraction.
+
+    Returns:
+        array-like: The cleaned signal after spectral subtraction.
+    """
+    signal_fft = np.fft.fft(signal)
+    noise_fft = np.fft.fft(noise)
+    
+    # Scale the noise spectrum
+    scaled_noise_fft = scaling_factor * np.abs(noise_fft)
+    
+    # Perform spectral subtraction
+    clean_fft = np.maximum(np.abs(signal_fft) - scaled_noise_fft, 0)
+    clean_signal = np.fft.ifft(clean_fft * np.exp(1j * np.angle(signal_fft)))
+    
+    return np.real(clean_signal)
+
+
+def wavelet_denoise(signal, wavelet='db4', level=4):
+    coeffs = pywt.wavedec(signal, wavelet, mode='symmetric', level=level)
+    threshold = np.sqrt(2 * np.log(len(signal))) * np.std(coeffs[-1])
+    
+    denoised_coeffs = [pywt.threshold(c, threshold, mode='soft') if i > 0 else c for i, c in enumerate(coeffs)]
+    denoised_signal = pywt.waverec(denoised_coeffs, wavelet)
+    
+    return denoised_signal
+
+def autocorrelation(signal):
+    autocorr = np.correlate(signal, signal, mode='same')
+    return autocorr[len(signal)-1:]
