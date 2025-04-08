@@ -980,7 +980,21 @@ def fade_out(data, sample_rate, fade_time=0.1, window="hann"):  # pragma: no cov
     return data
 
 
-def echo(data, sample_rate, delay=0.1, decay=0.5):  # pragma: no cover
+def echo(data,  sample_rate, delay=0.1, decay=0.5):
+    """
+    Adds echo to audio data.
+
+    Args:
+        data (array | np.array | pd.Series): audio data to add echo to
+        sample_rate (int | float): sample rate of audio data
+        delay (int | float, optional): delay in the echo. Defaults to 0.1.
+        decay (int | float, optional): decay of the echo. Defaults to 0.5.
+
+    Returns:
+        list|np.array|pd.Series: _description_
+    """
+
+
     delay_samples = int(sample_rate * delay)
     decay_samples = int(sample_rate * decay)
     echo = np.zeros(len(data) + delay_samples)
