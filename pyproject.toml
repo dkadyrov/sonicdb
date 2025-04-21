@@ -45,7 +45,8 @@ build-backend = "hatchling.build"
 
 [project]
 name = "SONICDB"
-dynamic = ["version"]
+version = "0.1.0"
+dynamic = [] 
 description = 'SONIC is a Python package that leverages relational databases to accommodate the storage and retrieval of audio files.'
 readme = "README.md"
 license = "MIT"
