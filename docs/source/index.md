@@ -4,6 +4,16 @@ hide-toc: true
 
 # SONICDB
 
+```{toctree}
+:hidden:
+
+about
+usage
+guide
+audio
+Changelog <https://github.com/dkadyrov/sonicdb/releases>
+```
+
 ## About
 
 The Sound Organization and Network Integration for Collection/Collaboration (SONIC) Python package leverages relational database management systems to store and manage acoustic data and its associated metadata.
@@ -45,11 +55,3 @@ pip install git+https://github.com/dkadyrov/sonicdb.git
 ### Documentation
 
 The documentation for the SONIC Python package can be found [here](/guide/guide).
-
-```{toctree}
-:hidden:
-
-guide
-audio
-Changelog <https://github.com/dkadyrov/sonicdb/releases>
-```
