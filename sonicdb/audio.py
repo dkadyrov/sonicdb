@@ -23,7 +23,20 @@ valid_audio = ["wav", "flac", "mp3", "ogg", "aiff", "au"]
 
 class Audio:  # pragma: no cover
     """
-    Audio class for handling audio files
+    A class for handling audio files, providing functionalities such as loading, trimming, resampling, filtering, and visualization.
+
+    Attributes:
+        filepath (str): Path to the audio file.
+        filename (str): Name of the audio file.
+        audio (np.ndarray): Audio data as a NumPy array.
+        sample_rate (int): Sampling rate of the audio.
+        duration (float): Duration of the audio in seconds.
+        length (int): Length of the audio data in samples.
+        metadata (dict): Metadata of the audio file.
+        extension (str): File extension of the audio file.
+        data (pd.DataFrame): DataFrame containing audio signal and time-related information.
+        start (datetime): Start time of the audio.
+        end (datetime): End time of the audio.
     """
 
     def __init__(self, filepath=None, audio=None, sample_rate=None, start=None):
@@ -73,10 +86,10 @@ class Audio:  # pragma: no cover
 
     def add_data(self, filepath):
         """
-        Adds data from another audio file to this one
+        Append audio data from another file to the current audio object.
 
         Args:
-            filepath (str): filepath to audio file to add
+            filepath (str): Path to the audio file to append.
         """
 
         audio = Audio(filepath)
@@ -98,24 +111,19 @@ class Audio:  # pragma: no cover
 
         self.metadata.np.append(audio.metadata)
 
-    def trim(
-        self,
-        start: datetime or str or float or int,
-        end: datetime or str or float or int = None,
-        length: float = None,
-        time_format="datetime",
-        restart=False,
-    ):
+    def trim(self, start, end=None, length=None, time_format="datetime", restart=False):
         """
-        Trims audio to specified start and end times or length
+        Trim the audio to a specified start and end time or length.
 
         Args:
-            start (datetime or str): Start time of audio
-            end (datetime or str, optional): End time of audio. Defaults to None.
-            length (float, optional): Length of audio sample in seconds, milliseconds, or samples. Defaults to None.
+            start (datetime | str | float | int): Start time of the trim.
+            end (datetime | str | float | int, optional): End time of the trim. Defaults to None.
+            length (float, optional): Length of the trimmed audio in seconds, milliseconds, or samples. Defaults to None.
+            time_format (str, optional): Format of the time ('datetime', 'samples', 'seconds', 'ms'). Defaults to "datetime".
+            restart (bool, optional): Whether to reset the time indices. Defaults to False.
 
         Returns:
-            audio.Audio: Trimmed audio sample
+            Audio: A new Audio object with the trimmed data.
         """
         sample = deepcopy(self)
 
@@ -178,10 +186,10 @@ class Audio:  # pragma: no cover
 
     def resample(self, sample_rate: int) -> None:
         """
-        Resamples audio to sample rate
+        Resample the audio to a new sample rate.
 
         Args:
-            sample_rate (int): Sample rate to resample audio to
+            sample_rate (int): Target sample rate.
         """
 
         try:
@@ -204,26 +212,20 @@ class Audio:  # pragma: no cover
         self.data["ms"] = self.data["seconds"] * 1000
         self.data["signal"] = self.audio
 
-    def spectrogram(
-        self,
-        window="hann",
-        window_size: int = 8192,
-        nfft: int = 8192,
-        noverlap: int = 4096,
-        nperseg: int = 8192,
-        time_format="datetime",
-    ) -> tuple:
+    def spectrogram(self, window="hann", window_size=8192, nfft=8192, noverlap=4096, nperseg=8192, time_format="datetime") -> tuple:
         """
-        Generates spectrogram of audio
+        Generate a spectrogram of the audio.
 
         Args:
-            window_size (int, optional): Window size. Defaults to 8192.
-            nfft (int, optional): Number for FFT. Defaults to 4096.
-            noverlap (int, optional): Sample overlap. Defaults to 4096.
-            nperseg (int, optional): Number of Samples. Defaults to 8192.
+            window (str, optional): Window function to use. Defaults to "hann".
+            window_size (int, optional): Size of the window in samples. Defaults to 8192.
+            nfft (int, optional): Number of FFT points. Defaults to 8192.
+            noverlap (int, optional): Number of overlapping samples. Defaults to 4096.
+            nperseg (int, optional): Number of samples per segment. Defaults to 8192.
+            time_format (str, optional): Format of the time axis ('datetime', 'samples', 'seconds', 'ms'). Defaults to "datetime".
 
         Returns:
-            tuple: time, frequency, Pxx
+            tuple: Time, frequency, and power spectral density (Pxx).
         """
 
         time, frequency, Pxx = spectrogram(
@@ -241,23 +243,29 @@ class Audio:  # pragma: no cover
 
         return time, frequency, Pxx
 
-    def plot_spectrogram(
-        self,
-        window="hann",
-        window_size: int = 8192,
-        nfft: int = 8192,
-        noverlap: int = 4096,
-        nperseg: int = 8192,
-        zmin: int = None,
-        zmax: int = None,
-        gain: int = 0,
-        showscale: bool = False,
-        cmap="jet",
-        aspect="auto",
-        time_format="datetime",
-        fig=None,
-        ax=None,
-    ):
+    def plot_spectrogram(self, window="hann", window_size: int = 8192, nfft: int = 8192, noverlap: int = 4096, nperseg: int = 8192, zmin: int = None, zmax: int = None, gain: int = 0, showscale: bool = False, cmap="jet", aspect="auto", time_format="datetime", fig=None, ax=None):
+        """
+        Plot the spectrogram of the audio.
+
+        Args:
+            window (str, optional): Window function to use. Defaults to "hann".
+            window_size (int, optional): Size of the window in samples. Defaults to 8192.
+            nfft (int, optional): Number of FFT points. Defaults to 8192.
+            noverlap (int, optional): Number of overlapping samples. Defaults to 4096.
+            nperseg (int, optional): Number of samples per segment. Defaults to 8192.
+            zmin (int, optional): Minimum z-value for color scale. Defaults to None.
+            zmax (int, optional): Maximum z-value for color scale. Defaults to None.
+            gain (int, optional): Gain to apply to the spectrogram. Defaults to 0.
+            showscale (bool, optional): Whether to show color scale. Defaults to False.
+            cmap (str, optional): Colormap to use. Defaults to "jet".
+            aspect (str, optional): Aspect ratio. Defaults to "auto".
+            time_format (str, optional): Format of the time axis ('datetime', 'samples', 'seconds', 'ms'). Defaults to "datetime".
+            fig (matplotlib.figure.Figure, optional): Figure object to plot on. Defaults to None.
+            ax (matplotlib.axes.Axes, optional): Axis object to plot on. Defaults to None.
+
+        Returns:
+            tuple: Figure and axis objects if a figure is created.
+        """
         if ax is None:
             fig, ax = plt.subplots()
 
@@ -344,25 +352,31 @@ class Audio:  # pragma: no cover
         if fig:
             return fig, ax
 
-    def plot_melspectrogram(
-        self,
-        window="hann",
-        nmels: int = 8192,
-        window_size: int = 8192,
-        nfft: int = 8192,
-        noverlap: int = 4096,
-        nperseg: int = 8192,
-        zmin: int = None,
-        zmax: int = None,
-        gain: int = 0,
-        showscale: bool = False,
-        cmap="jet",
-        aspect="auto",
-        time_format="datetime",
-        ax=None,
-        fmin=0,
-        fmax=None,
-    ):
+    def plot_melspectrogram(self, window="hann", nmels: int = 8192, window_size: int = 8192, nfft: int = 8192, noverlap: int = 4096, nperseg: int = 8192, zmin: int = None, zmax: int = None, gain: int = 0, showscale: bool = False, cmap="jet", aspect="auto", time_format="datetime", ax=None, fmin=0, fmax=None):
+        """
+        Plot the mel spectrogram of the audio.
+
+        Args:
+            window (str, optional): Window function to use. Defaults to "hann".
+            nmels (int, optional): Number of mel bands to generate. Defaults to 8192.
+            window_size (int, optional): Size of the window in samples. Defaults to 8192.
+            nfft (int, optional): Number of FFT points. Defaults to 8192.
+            noverlap (int, optional): Number of overlapping samples. Defaults to 4096.
+            nperseg (int, optional): Number of samples per segment. Defaults to 8192.
+            zmin (int, optional): Minimum z-value for color scale. Defaults to None.
+            zmax (int, optional): Maximum z-value for color scale. Defaults to None.
+            gain (int, optional): Gain to apply to the spectrogram. Defaults to 0.
+            showscale (bool, optional): Whether to show color scale. Defaults to False.
+            cmap (str, optional): Colormap to use. Defaults to "jet".
+            aspect (str, optional): Aspect ratio. Defaults to "auto".
+            time_format (str, optional): Format of the time axis ('datetime', 'samples', 'seconds', 'ms'). Defaults to "datetime".
+            ax (matplotlib.axes.Axes, optional): Axis object to plot on. Defaults to None.
+            fmin (int, optional): Minimum frequency. Defaults to 0.
+            fmax (int, optional): Maximum frequency. Defaults to None.
+
+        Returns:
+            tuple: Figure and axis objects if a figure is created.
+        """
         if ax is None:
             fig, ax = plt.subplots()
         else:
@@ -447,6 +461,16 @@ class Audio:  # pragma: no cover
             return fig, ax
 
     def plot_waveform(self, time_format: str = "datetime", ax=None):
+        """
+        Plot the waveform of the audio.
+
+        Args:
+            time_format (str, optional): Format of the time axis ('datetime', 'samples', 'seconds', 'ms'). Defaults to "datetime".
+            ax (matplotlib.axes.Axes, optional): Axis object to plot on. Defaults to None.
+
+        Returns:
+            tuple: Figure and axis objects if a figure is created.
+        """
         if ax is None:
             fig, ax = plt.subplots()
         else:
@@ -479,6 +503,15 @@ class Audio:  # pragma: no cover
             return fig, ax
 
     def plot_envelope(self, time_format: str = "datetime"):
+        """
+        Plot the envelope of the audio signal.
+
+        Args:
+            time_format (str, optional): Format of the time axis ('datetime', 'samples', 'seconds', 'ms'). Defaults to "datetime".
+
+        Returns:
+            tuple: Figure and axis objects.
+        """
         fig, ax = plt.subplots()
 
         if time_format == "datetime":
@@ -508,13 +541,13 @@ class Audio:  # pragma: no cover
 
     def psd(self, window_size: int = 4096) -> tuple:
         """
-        Generates the power spectral density of the audio
+        Compute the power spectral density (PSD) of the audio.
 
         Args:
-            window_size (int, optional): Sample window size. Defaults to 4096.
+            window_size (int, optional): Size of the window in samples. Defaults to 4096.
 
         Returns:
-            tuple: frequency, power
+            tuple: Frequency and power values.
         """
         frequency, power = psd(
             self.data.signal, self.sample_rate, window_size=window_size
@@ -524,13 +557,13 @@ class Audio:  # pragma: no cover
 
     def plot_psd(self, window_size: int = 4096) -> tuple:
         """
-        Plots the power spectral density of the audio
+        Plot the power spectral density (PSD) of the audio.
 
         Args:
-            window_size (int, optional): Sample window size. Defaults to 4096.
+            window_size (int, optional): Size of the window in samples. Defaults to 4096.
 
         Returns:
-            tuple: figure, axis
+            tuple: Figure and axis objects.
         """
         frequency, power = self.psd(window_size=window_size)
 
@@ -543,14 +576,16 @@ class Audio:  # pragma: no cover
 
     def lowpass_filter(self, cutoff, order=4, overwrite=False, type="sos"):
         """
-        Lowpass filter using Butterworth filter
+        Apply a lowpass Butterworth filter to the audio.
 
         Args:
-            cutoff (int): Cutoff frequency
-            order (int): Order of filter
+            cutoff (int): Cutoff frequency in Hz.
+            order (int, optional): Filter order. Defaults to 4.
+            overwrite (bool, optional): Whether to overwrite the current audio. Defaults to False.
+            type (str, optional): Filter type ('sos' or 'ab'). Defaults to "sos".
 
         Returns:
-            Audio: Filtered audio
+            list | None: Filtered audio if overwrite is False.
         """
 
         audio = butter_lowpass_filter(
@@ -565,14 +600,16 @@ class Audio:  # pragma: no cover
 
     def highpass_filter(self, cutoff, order=4, overwrite=False, type="sos"):
         """
-        Highpass filter using Butterworth filter
+        Apply a highpass Butterworth filter to the audio.
 
         Args:
-            cutoff (int): Cutoff frequency
-            order (int): Order of filter
+            cutoff (int): Cutoff frequency in Hz.
+            order (int, optional): Filter order. Defaults to 4.
+            overwrite (bool, optional): Whether to overwrite the current audio. Defaults to False.
+            type (str, optional): Filter type ('sos' or 'ab'). Defaults to "sos".
 
         Returns:
-            Audio: Filtered audio
+            list | None: Filtered audio if overwrite is False.
         """
 
         audio = butter_highpass_filter(
@@ -587,15 +624,17 @@ class Audio:  # pragma: no cover
 
     def bandpass_filter(self, lowcut, highcut, order=4, type="sos", overwrite=False):
         """
-        Bandpass filter using Butterworth filter
+        Apply a bandpass Butterworth filter to the audio.
 
         Args:
-            lowcut (int): Low cutoff frequency
-            highcut (int): High cutoff frequency
-            order (int): Order of filter
+            lowcut (int): Low cutoff frequency in Hz.
+            highcut (int): High cutoff frequency in Hz.
+            order (int, optional): Filter order. Defaults to 4.
+            type (str, optional): Filter type ('sos' or 'ab'). Defaults to "sos".
+            overwrite (bool, optional): Whether to overwrite the current audio. Defaults to False.
 
         Returns:
-            Audio: Filtered audio
+            list | None: Filtered audio if overwrite is False.
         """
 
         audio = butter_bandpass_filter(
@@ -609,6 +648,15 @@ class Audio:  # pragma: no cover
             return list(audio)
 
     def envelope(self, overwrite=False):
+        """
+        Compute the envelope of the audio signal using the Hilbert transform.
+
+        Args:
+            overwrite (bool, optional): Whether to overwrite the current audio. Defaults to False.
+
+        Returns:
+            np.ndarray: Envelope of the audio signal.
+        """
         envelope = np.abs(signal.hilbert(self.data.signal))
 
         if overwrite is True:
@@ -620,12 +668,10 @@ class Audio:  # pragma: no cover
 
     def write_audio(self, filepath: str) -> None:
         """
-        Writes audiofile of data with set samplerate. Omit extension, will output only wav.
+        Write the audio data to a file.
 
         Args:
-            data (list or pd.Series): data to output
-            filepath (str): filepath of output
-            sample_rate (int): desired file sample rate
+            filepath (str): Path to save the audio file. The file will be saved as a WAV file.
         """
         if ".wav" not in filepath:
             filepath = filepath + ".wav"
@@ -633,6 +679,17 @@ class Audio:  # pragma: no cover
         sf.write(filepath, self.data.signal, self.sample_rate)
 
     def fade_in(self, fade_time=0.1, window="hann", overwrite=False):
+        """
+        Apply a fade-in effect to the audio.
+
+        Args:
+            fade_time (float, optional): Duration of the fade-in effect in seconds. Defaults to 0.1.
+            window (str, optional): Window function to use. Defaults to "hann".
+            overwrite (bool, optional): Whether to overwrite the current audio. Defaults to False.
+
+        Returns:
+            np.ndarray | None: Audio with fade-in effect if overwrite is False.
+        """
         data = fade_in(self.data.signal.values, self.sample_rate, fade_time, window)
 
         if overwrite is True:
@@ -642,6 +699,17 @@ class Audio:  # pragma: no cover
             return data
 
     def fade_out(self, fade_time=0.1, window="hann", overwrite=False):
+        """
+        Apply a fade-out effect to the audio.
+
+        Args:
+            fade_time (float, optional): Duration of the fade-out effect in seconds. Defaults to 0.1.
+            window (str, optional): Window function to use. Defaults to "hann".
+            overwrite (bool, optional): Whether to overwrite the current audio. Defaults to False.
+
+        Returns:
+            np.ndarray | None: Audio with fade-out effect if overwrite is False.
+        """
         data = fade_out(self.data.signal.values, self.sample_rate, fade_time, window)
 
         if overwrite is True:
@@ -653,13 +721,13 @@ class Audio:  # pragma: no cover
 
 def combine_audio(list_of_files):  # pragma: no cover
     """
-    Combines audio files into one audio file
+    Combine multiple audio files into one.
 
     Args:
-        list_of_files (list): List of audio files to combine
+        list_of_files (list): List of file paths to combine.
 
     Returns:
-        Audio: Combined audio file
+        Audio: Combined audio object.
     """
 
     combined = None
@@ -674,6 +742,18 @@ def combine_audio(list_of_files):  # pragma: no cover
 
 
 def butter_lowpass(cutoff, fs, order, type="sos"):  # pragma: no cover
+    """
+    Design a lowpass Butterworth filter.
+
+    Args:
+        cutoff (float): Cutoff frequency in Hz.
+        fs (float): Sampling rate in Hz.
+        order (int): Filter order.
+        type (str, optional): Filter type ('sos' or 'ab'). Defaults to "sos".
+
+    Returns:
+        np.ndarray | tuple: Filter coefficients.
+    """
     nyq = 0.5 * fs
     cutoff = cutoff / nyq
 
@@ -686,6 +766,19 @@ def butter_lowpass(cutoff, fs, order, type="sos"):  # pragma: no cover
 
 
 def butter_lowpass_filter(data, cutoff, fs, order=5, type="sos"):  # pragma: no cover
+    """
+    Apply a lowpass Butterworth filter to the data.
+
+    Args:
+        data (array-like): Input data to be filtered.
+        cutoff (float): Cutoff frequency in Hz.
+        fs (float): Sampling rate in Hz.
+        order (int, optional): Order of the filter. Defaults to 5.
+        type (str, optional): Type of the filter ('sos' or 'ab'). Defaults to "sos".
+
+    Returns:
+        array-like: Filtered data.
+    """
     if type == "ab":
         b, a = butter_lowpass(cutoff, fs, order=order)
         y = signal.filtfilt(b, a, data)
@@ -697,6 +790,18 @@ def butter_lowpass_filter(data, cutoff, fs, order=5, type="sos"):  # pragma: no 
 
 
 def butter_highpass(cutoff, fs, order=5, type="sos"):  # pragma: no cover
+    """
+    Design a highpass Butterworth filter.
+
+    Args:
+        cutoff (float): Cutoff frequency in Hz.
+        fs (float): Sampling rate in Hz.
+        order (int): Order of the filter.
+        type (str, optional): Type of the filter ('sos' or 'ab'). Defaults to "sos".
+
+    Returns:
+        np.ndarray | tuple: Filter coefficients.
+    """
     nyq = 0.5 * fs
     normal_cutoff = cutoff / nyq
     if type == "ab":
@@ -711,6 +816,19 @@ def butter_highpass(cutoff, fs, order=5, type="sos"):  # pragma: no cover
 
 
 def butter_highpass_filter(data, cutoff, fs, order=5, type="sos"):  # pragma: no cover
+    """
+    Apply a highpass Butterworth filter to the data.
+
+    Args:
+        data (array-like): Input data to be filtered.
+        cutoff (float): Cutoff frequency in Hz.
+        fs (float): Sampling rate in Hz.
+        order (int, optional): Order of the filter. Defaults to 5.
+        type (str, optional): Type of the filter ('sos' or 'ab'). Defaults to "sos".
+
+    Returns:
+        array-like: Filtered data.
+    """
     if type == "ab":
         b, a = butter_highpass(cutoff, fs, order=order)
         y = signal.filtfilt(b, a, data)
@@ -722,6 +840,19 @@ def butter_highpass_filter(data, cutoff, fs, order=5, type="sos"):  # pragma: no
 
 
 def butter_bandpass(lowcut, highcut, fs, order=5, type="sos"):  # pragma: no cover
+    """
+    Design a bandpass Butterworth filter.
+
+    Args:
+        lowcut (float): Low cutoff frequency in Hz.
+        highcut (float): High cutoff frequency in Hz.
+        fs (float): Sampling rate in Hz.
+        order (int, optional): Order of the filter. Defaults to 5.
+        type (str, optional): Type of the filter ('sos' or 'ab'). Defaults to "sos".
+
+    Returns:
+        np.ndarray | tuple: Filter coefficients.
+    """
     nyq = 0.5 * fs
     low = lowcut / nyq
     high = highcut / nyq
@@ -739,6 +870,20 @@ def butter_bandpass(lowcut, highcut, fs, order=5, type="sos"):  # pragma: no cov
 def butter_bandpass_filter(
     data, lowcut, highcut, fs, order=5, type="sos"
 ):  # pragma: no cover
+    """
+    Apply a bandpass Butterworth filter to the data.
+
+    Args:
+        data (array-like): Input data to be filtered.
+        lowcut (float): Low cutoff frequency in Hz.
+        highcut (float): High cutoff frequency in Hz.
+        fs (float): Sampling rate in Hz.
+        order (int, optional): Order of the filter. Defaults to 5.
+        type (str, optional): Type of the filter ('sos' or 'ab'). Defaults to "sos".
+
+    Returns:
+        array-like: Filtered data.
+    """
     if type == "ab":
         b, a = butter_bandpass(lowcut, highcut, fs, order=order, type="ab")
         y = signal.filtfilt(b, a, data)

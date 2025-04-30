@@ -32,7 +32,7 @@ class Database:  # pragma: no cover
         Inherits the DBSession class from SQLAlchemy. `Available here <https://docs.sqlalchemy.org/en/14/orm/session.html>`_.
         """
 
-        # TODO Set values through JSON and XML input
+        # TODO Set values through YAML, JSON, and/or XML input
         self.session.sample_duration = 60
         """int: duration of the sample in seconds"""
 
@@ -52,7 +52,22 @@ class Database:  # pragma: no cover
         sensor: Sensor = None,
         channel: Channel = None,
         channel_number: int = None,
-    ) -> audio.Audio:  #
+    ) -> audio.Audio:
+        """
+        Get audio data from the database.
+
+        Args:
+            start (datetime): Start time of the audio data.
+            end (datetime): End time of the audio data.
+            event (Event): Event object to get the audio data from.
+            sensor (Sensor): Sensor object to get the audio data from.
+            channel (Channel): Channel object to get the audio data from.
+            channel_number (int): Channel number to get the audio data from.
+
+        Returns:
+            audio.Audio: Audio object containing the audio data.
+        """
+
         init_start = start
         init_end = end
 
@@ -135,7 +150,7 @@ class Database:  # pragma: no cover
         if len(data) < length:
             data.extend([0.0] * int(length - len(data)))
         if len(data) > length:
-            data = data[:int(length)]
+            data = data[: int(length)]
 
         a = audio.Audio(
             audio=np.asarray(data), sample_rate=sample_rate, start=file_start
@@ -146,7 +161,17 @@ class Database:  # pragma: no cover
 
     def get_sensor(
         self, sensor: Sensor | int | dict[str, int] | str
-    ) -> Sensor | None:  #
+    ) -> Sensor | None: 
+        """
+        Get a sensor from the database.
+
+        Args:
+            sensor (Sensor | int | dict[str, int] | str): Sensor object, sensor ID, or sensor name.
+                If a dictionary is passed, it should contain the keys "name" and "subname". 
+        
+        Returns:
+            Sensor | None: Sensor object if found, None otherwise.         
+        """
         if isinstance(sensor, Sensor):
             return sensor
         elif isinstance(sensor, int):
@@ -174,7 +199,17 @@ class Database:  # pragma: no cover
 
     def get_subject(
         self, subject: Subject | int | dict[str, int] | str
-    ) -> Subject | None:  #
+    ) -> Subject | None:
+        """
+        Get a subject from the database.
+
+        Args:
+            subject (Subject | int | dict[str, int] | str): Subject object, subject ID, or subject name.
+                If a dictionary is passed, it should contain the key "name".
+
+        Returns:
+            Subject | None: Subject object if found, None otherwise.
+        """
         if isinstance(subject, Subject):
             return subject
         elif isinstance(subject, int):
@@ -199,7 +234,18 @@ class Database:  # pragma: no cover
 
     def get_channel(
         self, channel: Channel | int | dict[str, int], sensor: Sensor | None = None
-    ) -> Channel | None:  #
+    ) -> Channel | None:
+        """
+        Get a channel from the database.
+
+        Args:
+            channel (Channel | int | dict[str, int]): Channel object, channel ID, or channel details as a dictionary.
+                If a dictionary is passed, it should contain the key "number".
+            sensor (Sensor | None): Sensor object or sensor ID associated with the channel.
+
+        Returns:
+            Channel | None: Channel object if found, None otherwise.
+        """
         if isinstance(channel, Channel):
             return channel
         elif isinstance(channel, int):

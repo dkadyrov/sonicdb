@@ -1,9 +1,8 @@
-from sonicdb.database.base import Base
-from sonicdb.database.channel import Channel
-from sonicdb.database.classification import Classification
-from sonicdb.database.event import Event
-from sonicdb.database.event import EventChannel
-from sonicdb.database.file import File
-from sonicdb.database.sample import Sample
-from sonicdb.database.sensor import Sensor
-from sonicdb.database.subject import Subject
+from sonicdb.database.base import Base # noqa
+from sonicdb.database.channel import Channel # noqa
+from sonicdb.database.classification import Classification # noqa
+from sonicdb.database.event import Event, EventChannel # noqa
+from sonicdb.database.file import File # noqa
+from sonicdb.database.sample import Sample # noqa
+from sonicdb.database.sensor import Sensor # noqa
+from sonicdb.database.subject import Subject # noqa

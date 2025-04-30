@@ -50,12 +50,14 @@ audiofiles = [
 
 
 def lower_keys(tree: dict) -> dict[str, int]:  # pragma: no cover
-    """Normalizes a dictionary to have lowercase and snakecase keys
+    """
+    Normalize a dictionary to have lowercase and snake_case keys.
 
-    :param tree: tree
-    :type tree: dict
-    :return: normalized tree
-    :rtype: dict
+    Args:
+        tree (dict): Dictionary to normalize.
+
+    Returns:
+        dict[str, int]: Normalized dictionary.
     """
 
     data = {}
@@ -69,13 +71,13 @@ def lower_keys(tree: dict) -> dict[str, int]:  # pragma: no cover
 
 def read_datetime(string: str) -> datetime:  # pragma: no cover
     """
-    Reads and converts datetime
+    Read and convert a datetime string to a datetime object.
 
     Args:
-        string (String): datetime string
+        string (str): Datetime string to convert.
 
     Returns:
-        datetime.Datetime: converted datetime
+        datetime: Converted datetime object.
     """
 
     try:
@@ -92,13 +94,14 @@ def read_datetime(string: str) -> datetime:  # pragma: no cover
 
 def metadata(filepath: str, extended=False) -> dict:  # pragma: no cover
     """
-    Generates metadata of file
+    Generate metadata for a file.
 
     Args:
-        filepath (str): filepath of file
+        filepath (str): Filepath of the file.
+        extended (bool, optional): Whether to include extended metadata. Defaults to False.
 
     Returns:
-        dict: metadata of file
+        dict: Metadata of the file.
     """
 
     metadata = {}
@@ -156,13 +159,15 @@ def metadatas(
     filepaths: list, extended=False, stevens=False
 ) -> pd.DataFrame:  # pragma: no cover
     """
-    Generates metadata of files
+    Generate metadata for multiple files.
 
     Args:
-        filepaths (list): list of filepaths
+        filepaths (list): List of filepaths.
+        extended (bool, optional): Whether to include extended metadata. Defaults to False.
+        stevens (bool, optional): Whether to adjust metadata for Stevens' format. Defaults to False.
 
     Returns:
-        pd.DataFrame: metadata of files
+        pd.DataFrame: Metadata of the files.
     """
 
     metadatas = pd.DataFrame([metadata(filepath, extended) for filepath in filepaths])
