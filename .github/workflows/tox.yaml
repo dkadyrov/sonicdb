@@ -22,16 +22,23 @@ jobs:
     name: Run unit tests in tox
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Set up Python 3.12
-        uses: actions/setup-python@v2
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
         with:
-          python-version: '3.12'
-      - name: Install Python dependencies
-        run: python -m pip install -q poetry tox
+          python-version: '3.11'  # Match the Python version in your Hatch config
+
+      - name: Install Hatch and Tox
+        run: pip install hatch tox
+
+      - name: Install dependencies
+        run: hatch env create  # Create and install dependencies in the Hatch environment
+
       - name: Run all tox tests
         if: github.event_name != 'pull_request'
-        run: tox --
+        run: tox
+
       - name: Run tox tests (fast only)
         if: github.event_name == 'pull_request'
-        run: tox -- '-k not slow'
+        run: tox -- -k not slow

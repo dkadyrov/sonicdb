@@ -1,4 +1,4 @@
-name: Publish to TestPyPi
+name: Publish to TestPyPI
 
 on:
   push:
@@ -16,20 +16,18 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
-        python-version: '3.x'  # Specify your Python version
+        python-version: '3.11'  # Match the Python version in your Hatch config
 
-    - name: Install Poetry
-      run: pip install poetry
-
-    - name: Configure Poetry
-      run: |
-        poetry config repositories.testpypi https://test.pypi.org/legacy/        
-        poetry config pypi-token.testpypi ${{ secrets.PYPI_TEST_TOKEN }}
+    - name: Install Hatch
+      run: pip install hatch
 
     - name: Install dependencies
-      run: poetry install
+      run: hatch env create  # Create and install dependencies in the Hatch environment
 
-    - name: Build and publish package
-      run: poetry publish --build -r testpypi
+    - name: Run tests
+      run: hatch run test  # Run tests before publishing
+
+    - name: Publish to TestPyPI
       env:
-        POETRY_PYPI_TOKEN_TESTPYPI: ${{ secrets.PYPI_TEST_TOKEN }}
+        PYPI_TEST_TOKEN: ${{ secrets.PYPI_TEST_TOKEN }}
+      run: hatch build && hatch publish --repo testpypi

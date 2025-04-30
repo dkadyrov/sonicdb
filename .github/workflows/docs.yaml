@@ -1,4 +1,4 @@
-name: Publish to TestPyPi
+name: Build Documentation
 
 on:
   push:
@@ -16,13 +16,13 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
-        python-version: '3.x'  # Specify your Python version
+        python-version: '3.11'  # Match the Python version in your Hatch config
 
-    - name: Install Poetry
-      run: pip install poetry
+    - name: Install Hatch
+      run: pip install hatch
 
     - name: Install dependencies
-      run: poetry install
+      run: hatch env create  # Create and install dependencies in the Hatch environment
 
     - name: Build documentation
-      run: sphinx-build -b html docs/source docs/build/html
+      run: hatch run docs-build-html  # Use the Hatch script to build the documentation

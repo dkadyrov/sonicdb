@@ -14,13 +14,22 @@ dependencies = [
     "sphinx-autobuild",
     "sphinx-copybutton",
     "furo",
-    "myst-parser"
+    "myst-parser",
+    "librosa",
+    "pandas",
+    "pydub",
+    "matplotlib",
+    "sqlalchemy",
+    "sqlalchemy-utils",
+    "sqlalchemy-migrate",
+    "soundfile",
+    "scipy"
 ] 
 
 [tool.hatch.envs.default.scripts]
 test = "pytest"
 lint = [
-    "ruff format . ", 
+    "ruff format .", 
     "ruff lint .",
     "mypy spidb/"
 ]
@@ -46,8 +55,7 @@ build-backend = "hatchling.build"
 [project]
 name = "SONICDB"
 version = "0.1.0"
-dynamic = [] 
-description = 'SONIC is a Python package that leverages relational databases to accommodate the storage and retrieval of audio files.'
+description = "SONIC is a Python package that leverages relational databases to accommodate the storage and retrieval of audio files."
 readme = "README.md"
 license = "MIT"
 keywords = []
@@ -65,12 +73,12 @@ dependencies = [
   "sqlalchemy-migrate",
   "soundfile",
   "scipy",
-  "sphinx",  # Add this
-  "sphinx-click",  # Add this if needed
-  "sphinx-autobuild",  # Add this if needed
-  "sphinx-copybutton",  # Add this if needed
-  "furo",  # Add this if needed
-  "myst-parser"  # Add this if needed
+  "sphinx",
+  "sphinx-click",
+  "sphinx-autobuild",
+  "sphinx-copybutton",
+  "furo",
+  "myst-parser"
 ]
 
 [project.urls]
