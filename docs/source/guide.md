@@ -38,7 +38,7 @@ from sonicdb import sonic, models
 
 db = sonic.Database("database_name.db")
 
-file = db.File()
+file = models.File()
 ```
 
 ### Sensor
