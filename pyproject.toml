@@ -25,7 +25,8 @@ dependencies = [
     "sqlalchemy-migrate",
     "soundfile",
     "scipy",
-    "numpy"
+    "numpy", 
+    "linkify",
 ] 
 
 [tool.hatch.envs.default.scripts]
@@ -76,13 +77,7 @@ dependencies = [
   "sqlalchemy-migrate",
   "soundfile",
   "scipy",
-  "sphinx",
-  "sphinx-click",
-  "sphinx-autobuild",
-  "sphinx-copybutton",
-  "furo",
   "pywavelets",
-  "myst-parser"
 ]
 
 [project.urls]
