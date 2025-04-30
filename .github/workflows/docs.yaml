@@ -26,4 +26,3 @@ jobs:
 
     - name: Build and publish package
       run: poetry sphinx-build -b html docs/source docs/build/html
-
