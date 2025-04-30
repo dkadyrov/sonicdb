@@ -4,7 +4,7 @@ import pytest
 import numpy as np
 import pandas as pd
 from datetime import timedelta
-from sonicdb import sonicdb, models, audio
+from sonicdb import sonic, models, audio
 
 
 # @pytest.fixture(scope="module")
@@ -13,8 +13,8 @@ def test_database():
     if os.path.exists("examples/example.db"):
         os.remove("examples/example.db")
 
-    db = sonicdb.Database("examples/example.db")
-    sonicdb.database_exists(db.engine.url)
+    db = sonic.Database("examples/example.db")
+    sonic.database_exists(db.engine.url)
 
     sensor = models.Sensor(name="test_sensor")
     db.session.add(sensor)
@@ -22,7 +22,7 @@ def test_database():
     channel = models.Channel(sensor=sensor, number=0)
     db.session.add(channel)
 
-    f = audio.Audio("examples/sonicdb.wav")
+    f = audio.Audio("examples/sonic.wav")
 
     file = models.File(
         filepath=f.filename,
@@ -40,6 +40,7 @@ def test_database():
 
     subject = models.Subject(name="SONIC audio")
     db.session.add(subject)
+    db.session.commit()
 
     event = models.Event(
         name="SONIC waveform",
@@ -48,6 +49,7 @@ def test_database():
         end=file.end,
     )
     db.session.add(event)
+    db.session.commit()
 
     word = "SONIC"
     for i in range(5):
@@ -59,9 +61,11 @@ def test_database():
             file=file,
         )
         db.session.add(sample)
+        db.session.commit() 
 
-        classification = models.Classification(sample=sample, classification=word[i])
+        classification = models.Classification(sample=sample, classification=word[i], sensor=sample.sensor, classifier="test_classifier", datetime=sample.datetime)
         db.session.add(classification)
+        db.session.commit()
 
     db.session.commit()
     db.session.close()

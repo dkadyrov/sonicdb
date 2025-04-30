@@ -18,12 +18,14 @@ dependencies = [
     "librosa",
     "pandas",
     "pydub",
+    "pywavelets",
     "matplotlib",
     "sqlalchemy",
     "sqlalchemy-utils",
     "sqlalchemy-migrate",
     "soundfile",
-    "scipy"
+    "scipy",
+    "numpy"
 ] 
 
 [tool.hatch.envs.default.scripts]
@@ -38,9 +40,9 @@ lint-check = [
   "ruff .",
   "mypy spidb/"
 ]
-docs-serve = "sphinx-autobuild docs/. docs/build"
-docs-build-html = "sphinx-build -M html docs/. docs/build"
-docs-build-latex = "sphinx-build -M latex docs/. docs/build"
+docs-serve = "sphinx-autobuild docs/source/. docs/build"
+docs-build-html = "sphinx-build -M html docs/source/. docs/build"
+docs-build-latex = "sphinx-build -M latex docs/source/. docs/build"
 
 [tool.hatch.metadata]
 allow-direct-references = true
@@ -66,6 +68,7 @@ requires-python = ">=3.11"
 dependencies = [
   "librosa",
   "pandas",
+  "numpy",
   "pydub",
   "matplotlib",
   "sqlalchemy",
@@ -78,6 +81,7 @@ dependencies = [
   "sphinx-autobuild",
   "sphinx-copybutton",
   "furo",
+  "pywavelets",
   "myst-parser"
 ]
 

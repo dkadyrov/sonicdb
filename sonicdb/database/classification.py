@@ -23,7 +23,7 @@ class Classification(Base):  # type: ignore
     """int: classifier identification. Can reference id in an external lookup table """
     # TODO maybe have a table for different classifiers
 
-    classification = Column(Float)
+    classification = Column(String)
     """int: classification encoding. Accessed using :func:`~starpy.sad.database.Classification.class_encoding`"""
     # TODO maybe have a table for different classification encodings
 

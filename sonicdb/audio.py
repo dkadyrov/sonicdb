@@ -14,7 +14,7 @@ from pydub import AudioSegment
 from scipy import signal
 
 from sonicdb import utilities
-from mpl_toolkits.axes_grid1 import make_axes_locatable
+import pywt
 
 
 np.seterr(divide="ignore")

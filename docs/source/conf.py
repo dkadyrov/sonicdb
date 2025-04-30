@@ -14,7 +14,8 @@ autodoc_typehints = "description"
 html_theme = "furo"
 master_doc = "index"
 myst_enable_extensions = [
-    "colon_fence",
-    "deflist",
-    "substitution",
+    "colon_fence",  # For ::: fenced code blocks
+    "deflist",      # For definition lists
+    "substitution", # For text substitution
+    "linkify",      # Auto-detect URLs and turn them into links
 ]
