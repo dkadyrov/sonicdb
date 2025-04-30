@@ -29,6 +29,8 @@ jobs:
 
     - name: Publish to TestPyPI
       env:
-          TESTPYPI_USERNAME: ${{ secrets.TESTPYPI_USERNAME }}
-          PYPI_TEST_TOKEN: ${{ secrets.TESTPYPI_TOKEN }}
-      run: hatch build && hatch publish --repo testpypi
+        TESTPYPI_USERNAME: ${{ secrets.TESTPYPI_USERNAME }}
+        TESTPYPI_TOKEN: ${{ secrets.TESTPYPI_TOKEN }}
+      run: |
+        hatch build
+        hatch publish --repo testpypi --username $TESTPYPI_USERNAME --password $TESTPYPI_TOKEN

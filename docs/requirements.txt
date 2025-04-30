@@ -3,3 +3,4 @@ myst-parser==4.0.0
 sphinx==8.0.2
 sphinx-autobuild==2024.9.19
 sphinx-click==6.0.0
+linkify-it-py==1.0.3
