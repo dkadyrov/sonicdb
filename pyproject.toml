@@ -26,7 +26,7 @@ dependencies = [
     "soundfile",
     "scipy",
     "numpy", 
-    "linkify",
+    "linkify-it-py"
 ] 
 
 [tool.hatch.envs.default.scripts]
