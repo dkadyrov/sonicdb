@@ -3,13 +3,14 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="prev" title="SONIC" href="guide.html" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="SONIC API" href="sonicdb.html" /><link rel="prev" title="SONIC" href="sonic.html" />
 
     <!-- Generated with Sphinx 8.2.3 and Furo 2024.08.06 -->
         <title>Audio - SONICDB documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=302659d7" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=40c75f68" />
     
     
 
@@ -178,7 +179,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -198,9 +199,15 @@
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="guide.html">SONIC</a></li>
+  <p class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sonic.html">SONIC</a></li>
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Audio</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="sonicdb.html">SONIC API</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of SONIC API</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="sonicdb.database.html">sonicdb.database package</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference external" href="https://github.com/dkadyrov/sonicdb/releases">Changelog</a></li>
 </ul>
 
@@ -236,7 +243,7 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
@@ -245,6 +252,147 @@
           <section id="audio">
 <h1>Audio<a class="headerlink" href="#audio" title="Link to this heading">¶</a></h1>
 <p>The <code class="docutils literal notranslate"><span class="pre">audio</span></code> class provides access to the <code class="docutils literal notranslate"><span class="pre">Audio</span></code> object which contains methods for reading and writing audio files, extracting features, generating spectrograms, and more.</p>
+<section id="class-audio">
+<h2>Class: <code class="docutils literal notranslate"><span class="pre">Audio</span></code><a class="headerlink" href="#class-audio" title="Link to this heading">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">Audio</span></code> class is designed for handling audio files and provides functionalities such as loading, trimming, resampling, filtering, and visualization.</p>
+<section id="attributes">
+<h3>Attributes:<a class="headerlink" href="#attributes" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">filepath</span></code>: Path to the audio file.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">filename</span></code>: Name of the audio file.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">audio</span></code>: Audio data as a NumPy array.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sample_rate</span></code>: Sampling rate of the audio.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">duration</span></code>: Duration of the audio in seconds.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">length</span></code>: Length of the audio data in samples.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">metadata</span></code>: Metadata of the audio file.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">extension</span></code>: File extension of the audio file.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">data</span></code>: DataFrame containing audio signal and time-related information.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">start</span></code>: Start time of the audio.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">end</span></code>: End time of the audio.</p></li>
+</ul>
+</section>
+<section id="methods">
+<h3>Methods:<a class="headerlink" href="#methods" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">__init__</span></code>: Initialize the <code class="docutils literal notranslate"><span class="pre">Audio</span></code> object with a file or raw audio data.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">add_data(filepath)</span></code>: Append audio data from another file.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">trim(start,</span> <span class="pre">end=None,</span> <span class="pre">length=None,</span> <span class="pre">time_format=&quot;datetime&quot;,</span> <span class="pre">restart=False)</span></code>: Trim the audio to a specified time range or length.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">resample(sample_rate)</span></code>: Resample the audio to a new sample rate.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">spectrogram(...)</span></code>: Generate a spectrogram of the audio.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">plot_spectrogram(...)</span></code>: Plot the spectrogram of the audio.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">plot_melspectrogram(...)</span></code>: Plot the mel spectrogram of the audio.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">plot_waveform(time_format=&quot;datetime&quot;)</span></code>: Plot the waveform of the audio.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">plot_envelope(time_format=&quot;datetime&quot;)</span></code>: Plot the envelope of the audio signal.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">psd(window_size=4096)</span></code>: Compute the power spectral density (PSD) of the audio.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">plot_psd(window_size=4096)</span></code>: Plot the PSD of the audio.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lowpass_filter(cutoff,</span> <span class="pre">order=4,</span> <span class="pre">overwrite=False,</span> <span class="pre">type=&quot;sos&quot;)</span></code>: Apply a lowpass Butterworth filter.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">highpass_filter(cutoff,</span> <span class="pre">order=4,</span> <span class="pre">overwrite=False,</span> <span class="pre">type=&quot;sos&quot;)</span></code>: Apply a highpass Butterworth filter.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bandpass_filter(lowcut,</span> <span class="pre">highcut,</span> <span class="pre">order=4,</span> <span class="pre">type=&quot;sos&quot;,</span> <span class="pre">overwrite=False)</span></code>: Apply a bandpass Butterworth filter.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">envelope(overwrite=False)</span></code>: Compute the envelope of the audio signal.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">write_audio(filepath)</span></code>: Write the audio data to a file.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fade_in(fade_time=0.1,</span> <span class="pre">window=&quot;hann&quot;,</span> <span class="pre">overwrite=False)</span></code>: Apply a fade-in effect to the audio.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fade_out(fade_time=0.1,</span> <span class="pre">window=&quot;hann&quot;,</span> <span class="pre">overwrite=False)</span></code>: Apply a fade-out effect to the audio.</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="usage-examples">
+<h2>Usage Examples<a class="headerlink" href="#usage-examples" title="Link to this heading">¶</a></h2>
+<section id="loading-an-audio-file">
+<h3>Loading an Audio File<a class="headerlink" href="#loading-an-audio-file" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sonicdb.audio</span><span class="w"> </span><span class="kn">import</span> <span class="n">Audio</span>
+
+<span class="c1"># Load an audio file</span>
+<span class="n">audio</span> <span class="o">=</span> <span class="n">Audio</span><span class="p">(</span><span class="n">filepath</span><span class="o">=</span><span class="s2">&quot;example.wav&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Duration: </span><span class="si">{</span><span class="n">audio</span><span class="o">.</span><span class="n">duration</span><span class="si">}</span><span class="s2"> seconds&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="trimming-audio">
+<h3>Trimming Audio<a class="headerlink" href="#trimming-audio" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Trim the audio from 5 to 10 seconds</span>
+<span class="n">trimmed_audio</span> <span class="o">=</span> <span class="n">audio</span><span class="o">.</span><span class="n">trim</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">time_format</span><span class="o">=</span><span class="s2">&quot;seconds&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Trimmed Duration: </span><span class="si">{</span><span class="n">trimmed_audio</span><span class="o">.</span><span class="n">duration</span><span class="si">}</span><span class="s2"> seconds&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="resampling-audio">
+<h3>Resampling Audio<a class="headerlink" href="#resampling-audio" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Resample the audio to 16 kHz</span>
+<span class="n">audio</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="n">sample_rate</span><span class="o">=</span><span class="mi">16000</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;New Sample Rate: </span><span class="si">{</span><span class="n">audio</span><span class="o">.</span><span class="n">sample_rate</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="generating-and-plotting-a-spectrogram">
+<h3>Generating and Plotting a Spectrogram<a class="headerlink" href="#generating-and-plotting-a-spectrogram" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate a spectrogram</span>
+<span class="n">time</span><span class="p">,</span> <span class="n">frequency</span><span class="p">,</span> <span class="n">Pxx</span> <span class="o">=</span> <span class="n">audio</span><span class="o">.</span><span class="n">spectrogram</span><span class="p">()</span>
+
+<span class="c1"># Plot the spectrogram</span>
+<span class="n">audio</span><span class="o">.</span><span class="n">plot_spectrogram</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="applying-filters">
+<h3>Applying Filters<a class="headerlink" href="#applying-filters" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Apply a lowpass filter with a cutoff frequency of 1000 Hz</span>
+<span class="n">filtered_audio</span> <span class="o">=</span> <span class="n">audio</span><span class="o">.</span><span class="n">lowpass_filter</span><span class="p">(</span><span class="n">cutoff</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="writing-audio-to-a-file">
+<h3>Writing Audio to a File<a class="headerlink" href="#writing-audio-to-a-file" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Save the audio to a new file</span>
+<span class="n">audio</span><span class="o">.</span><span class="n">write_audio</span><span class="p">(</span><span class="n">filepath</span><span class="o">=</span><span class="s2">&quot;output.wav&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="combining-multiple-audio-files">
+<h3>Combining Multiple Audio Files<a class="headerlink" href="#combining-multiple-audio-files" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sonicdb.audio</span><span class="w"> </span><span class="kn">import</span> <span class="n">combine_audio</span>
+
+<span class="c1"># Combine multiple audio files</span>
+<span class="n">combined_audio</span> <span class="o">=</span> <span class="n">combine_audio</span><span class="p">([</span><span class="s2">&quot;file1.wav&quot;</span><span class="p">,</span> <span class="s2">&quot;file2.wav&quot;</span><span class="p">,</span> <span class="s2">&quot;file3.wav&quot;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Combined Duration: </span><span class="si">{</span><span class="n">combined_audio</span><span class="o">.</span><span class="n">duration</span><span class="si">}</span><span class="s2"> seconds&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="adding-effects">
+<h3>Adding Effects<a class="headerlink" href="#adding-effects" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sonicdb.audio</span><span class="w"> </span><span class="kn">import</span> <span class="n">echo</span>
+
+<span class="c1"># Add an echo effect</span>
+<span class="n">echoed_audio</span> <span class="o">=</span> <span class="n">echo</span><span class="p">(</span><span class="n">audio</span><span class="o">.</span><span class="n">audio</span><span class="p">,</span> <span class="n">sample_rate</span><span class="o">=</span><span class="n">audio</span><span class="o">.</span><span class="n">sample_rate</span><span class="p">,</span> <span class="n">delay</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">decay</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="functions">
+<h2>Functions:<a class="headerlink" href="#functions" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">combine_audio(list_of_files)</span></code>: Combine multiple audio files into one.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">butter_lowpass(cutoff,</span> <span class="pre">fs,</span> <span class="pre">order,</span> <span class="pre">type=&quot;sos&quot;)</span></code>: Design a lowpass Butterworth filter.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">butter_lowpass_filter(data,</span> <span class="pre">cutoff,</span> <span class="pre">fs,</span> <span class="pre">order=5,</span> <span class="pre">type=&quot;sos&quot;)</span></code>: Apply a lowpass Butterworth filter.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">butter_highpass(cutoff,</span> <span class="pre">fs,</span> <span class="pre">order=5,</span> <span class="pre">type=&quot;sos&quot;)</span></code>: Design a highpass Butterworth filter.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">butter_highpass_filter(data,</span> <span class="pre">cutoff,</span> <span class="pre">fs,</span> <span class="pre">order=5,</span> <span class="pre">type=&quot;sos&quot;)</span></code>: Apply a highpass Butterworth filter.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">butter_bandpass(lowcut,</span> <span class="pre">highcut,</span> <span class="pre">fs,</span> <span class="pre">order=5,</span> <span class="pre">type=&quot;sos&quot;)</span></code>: Design a bandpass Butterworth filter.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">butter_bandpass_filter(data,</span> <span class="pre">lowcut,</span> <span class="pre">highcut,</span> <span class="pre">fs,</span> <span class="pre">order=5,</span> <span class="pre">type=&quot;sos&quot;)</span></code>: Apply a bandpass Butterworth filter.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">spectrogram(...)</span></code>: Generate a spectrogram of audio data.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">write_audio(data,</span> <span class="pre">filepath,</span> <span class="pre">sample_rate)</span></code>: Write audio data to a file.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mp3_to_wav(input,</span> <span class="pre">output,</span> <span class="pre">output_format=&quot;wav&quot;)</span></code>: Convert an MP3 file to WAV format.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">psd(x,</span> <span class="pre">sample_rate,</span> <span class="pre">window_size=4096,</span> <span class="pre">...)</span></code>: Compute the power spectral density of a signal.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">peak_hold(data,</span> <span class="pre">window=8192,</span> <span class="pre">sample_rate=24000)</span></code>: Compute the peak hold spectrum.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">average_hold(data,</span> <span class="pre">window=1024,</span> <span class="pre">sample_rate=24000)</span></code>: Compute the average hold spectrum.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fade_in(data,</span> <span class="pre">sample_rate,</span> <span class="pre">fade_time=0.1,</span> <span class="pre">window=&quot;hann&quot;)</span></code>: Apply a fade-in effect to audio data.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fade_out(data,</span> <span class="pre">sample_rate,</span> <span class="pre">fade_time=0.1,</span> <span class="pre">window=&quot;hann&quot;)</span></code>: Apply a fade-out effect to audio data.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">echo(data,</span> <span class="pre">sample_rate,</span> <span class="pre">delay=0.1,</span> <span class="pre">decay=0.5)</span></code>: Add an echo effect to audio data.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">spectral_subtraction(signal,</span> <span class="pre">noise,</span> <span class="pre">scaling_factor=1.0)</span></code>: Perform spectral subtraction for noise reduction.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">wavelet_denoise(signal,</span> <span class="pre">wavelet='db4',</span> <span class="pre">level=4)</span></code>: Denoise audio using wavelet decomposition.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">autocorrelation(signal)</span></code>: Compute the autocorrelation of an audio signal.</p></li>
+</ul>
+</section>
 </section>
 
         </article>
@@ -252,8 +400,16 @@
       <footer>
         
         <div class="related-pages">
-          
-          <a class="prev-page" href="guide.html">
+          <a class="next-page" href="sonicdb.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">SONIC API</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="sonic.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
@@ -282,8 +438,43 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Audio</a><ul>
+<li><a class="reference internal" href="#class-audio">Class: <code class="docutils literal notranslate"><span class="pre">Audio</span></code></a><ul>
+<li><a class="reference internal" href="#attributes">Attributes:</a></li>
+<li><a class="reference internal" href="#methods">Methods:</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#usage-examples">Usage Examples</a><ul>
+<li><a class="reference internal" href="#loading-an-audio-file">Loading an Audio File</a></li>
+<li><a class="reference internal" href="#trimming-audio">Trimming Audio</a></li>
+<li><a class="reference internal" href="#resampling-audio">Resampling Audio</a></li>
+<li><a class="reference internal" href="#generating-and-plotting-a-spectrogram">Generating and Plotting a Spectrogram</a></li>
+<li><a class="reference internal" href="#applying-filters">Applying Filters</a></li>
+<li><a class="reference internal" href="#writing-audio-to-a-file">Writing Audio to a File</a></li>
+<li><a class="reference internal" href="#combining-multiple-audio-files">Combining Multiple Audio Files</a></li>
+<li><a class="reference internal" href="#adding-effects">Adding Effects</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#functions">Functions:</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>

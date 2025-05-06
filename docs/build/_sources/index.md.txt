@@ -1,50 +1,27 @@
----
-hide-toc: true
----
-
-# SONICDB
-
-
 ```{toctree}
-:hidden:
+---
+hidden: true
+maxdepth: 3
+includehidden:
+caption: User Guide
+---
 
-guide
+getting_started
+sonic
 audio
+sonicdb
 Changelog <https://github.com/dkadyrov/sonicdb/releases>
 ```
 
 ## About
 
-The Sound Organization and Network Integration for Collection/Collaboration (SONIC) Python package leverages relational database management systems to store and manage acoustic data and its associated metadata.
+The Sound Organization and Network Integration for Collection/Collaboration Database (SONICDB) Python package leverages relational database management systems to store and manage acoustic data and its associated metadata.
 
-It was developed to address the lack of a standardized method of organizing audio files for research purposes, especially in the context of algorithm development and machine learning. 
+It was developed to address the lack of a standardized method of organizing audio files for research purposes, especially in the context of algorithm development and machine learning.
 
-The package is designed to be flexible and extendable, allowing users to retrofit it to their use cases while maintaining foundational models and methods for managing audio data. It uses widely used standard libraries including SQLAlchemy, Pandas, Numpy, and Librosa. Currently it emphasizes using SQLite as the database backend, but it can be extended to use other relational database management systems. 
+The package is designed to be flexible and extendable, allowing users to retrofit it to their use cases while maintaining foundational models and methods for managing audio data. It uses widely used standard libraries including SQLAlchemy, Pandas, Numpy, and Librosa. Currently it emphasizes using SQLite as the database backend, but it can be extended to use other relational database management systems.
 
-## Usage
+This package has been used to manage the following datasets: 
 
-### Requirements
-
-The SONICDB Python package requires Python 3.12 or later. It also depends on the following packages:
-
-- SQLAlchemy
-- Pandas
-- Numpy
-- Librosa
-- Pydub
-- SQLAlchemy-Utils
-- Soundfile
-- Scipy
-- Matplotlib
-
-### Installation
-
-SONICDB is available on PyPi and can be installed using pip:
-
-```bash
-pip install sonicdb
-```
-
-### Documentation
-
-The documentation for the SONIC Python package can be found [here](/guide/guide).
+- [Stored Product Insect Detection Database (SPIDB)](https://github.com/dkadyrov/spidb)
+- Drone Acoustic Dataset (DAD)

@@ -10,79 +10,93 @@ from datetime import datetime
 
 
 class Channel(Base):  # type: ignore
-    """Channel object"""
+    """
+    Represents a channel of a sensor in the database.
+
+    Attributes:
+        id (int): Unique identifier for the channel.
+        number (int): Channel number of the sensor.
+        type_class (str): Type of sensor.
+        gain (float): Gain of the sensor.
+        sensor_id (int): Foreign key referencing the associated sensor.
+        sensor (Sensor): Relationship to the Sensor object.
+        files (list[File]): List of File objects associated with the channel.
+        samples (list[Sample]): List of Sample objects associated with the channel.
+        events (list[EventChannel]): List of EventChannel objects associated with the channel.
+    """
 
     __tablename__ = "channel"
     id = Column(Integer, primary_key=True)
-    """int: Channel database ID"""
+    """int: Unique identifier for the channel."""
 
     number = Column(Integer)
-    """int: Channel number of the sensor"""
+    """int: Channel number of the sensor."""
 
     type_class = Column(String)
-    """str: Type of sensor"""
+    """str: Type or classification of the sensor."""
 
     gain = Column(Float)
-    """int: Gain of the sensor"""
+    """float: Gain value of the sensor."""
 
     sensor_id = Column(Integer, ForeignKey("sensor.id"))
-    """int: Sensor database ID"""
+    """int: Foreign key linking to the sensor's ID."""
 
     sensor = relationship(
         "sonicdb.database.sensor.Sensor",
         back_populates="channels",
         enable_typechecks=False,
     )
-    """Sensor: Sensor object"""
+    """Sensor: Associated sensor object."""
 
     files = relationship(
         "sonicdb.database.file.File", back_populates="channel", enable_typechecks=False
     )
-    """list: List of channel's File objects"""
+    """list[File]: List of files associated with the channel."""
 
     samples = relationship(
         "sonicdb.database.sample.Sample",
         back_populates="channel",
         enable_typechecks=False,
     )
-    """list: List of channel's Sample objects"""
+    """list[Sample]: List of samples associated with the channel."""
 
     events = relationship(
         "sonicdb.database.event.EventChannel",
         back_populates="channel",
         enable_typechecks=False,
     )
+    """list[EventChannel]: List of events associated with the channel."""
 
     __mapper_args__ = {"polymorphic_identity": "channel"}
 
     def __repr__(self) -> str:  # pragma: no cover
-        """Returns object representation"""
+        """Return a string representation of the channel.
 
+        Returns:
+            str: String representation of the channel.
+        """
         return f"Channel: {self.number} of Sensor"
 
     def get_start(self: "Channel") -> datetime:  # pragma: no cover
-        """Returns the earliest datetime of channel files
+        """Get the earliest datetime from the channel's files.
 
-        :return: Earliest recording from channel
-        :rtype: datetime
+        Returns:
+            datetime: The earliest recording datetime.
         """
-
         return min([f.start for f in self.files if isinstance(f.start, datetime)])
 
     def get_end(self: "Channel") -> datetime:  # pragma: no cover
-        """Returns the last datetime of channel files
+        """Get the latest datetime from the channel's files.
 
-        :return: Final recording time from channel
-        :rtype: datetime
+        Returns:
+            datetime: The latest recording datetime.
         """
-
         return max([f.end for f in self.files if isinstance(f.end, datetime)])
 
     def dict(self: "Channel") -> dict[str, int]:  # pragma: no cover
-        """Returns channel parameters and attributes as dictionary
+        """Convert the channel's attributes to a dictionary.
 
-        :return: channel parameters as dictionary
-        :rtype: dict
+        Returns:
+            dict[str, int]: Dictionary of channel attributes.
         """
-
         return {k.title(): v for k, v in self.__dict__.items()}

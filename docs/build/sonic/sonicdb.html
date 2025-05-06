@@ -1,0 +1,1547 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
+
+    <!-- Generated with Sphinx 8.2.3 and Furo 2024.08.06 -->
+        <title>SONIC API - SONICDB documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=354aac6f" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=302659d7" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=40c75f68" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">SONICDB  documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  
+  <span class="sidebar-brand-text">SONICDB  documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../audio/index.html">Audio</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/dkadyrov/sonicdb/releases">Changelog</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="../_sources/sonic/sonicdb.rst.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="sonic-api">
+<h1>SONIC API<a class="headerlink" href="#sonic-api" title="Link to this heading">¶</a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Link to this heading">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="sonicdb.database.html">sonicdb.database package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sonicdb.database.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sonicdb.database.html#module-sonicdb.database.base">sonicdb.database.base module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sonicdb.database.html#module-sonicdb.database.channel">sonicdb.database.channel module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="sonicdb.database.html#sonicdb.database.channel.Channel"><code class="docutils literal notranslate"><span class="pre">Channel</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#sonicdb.database.channel.Channel.id"><code class="docutils literal notranslate"><span class="pre">Channel.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#sonicdb.database.channel.Channel.number"><code class="docutils literal notranslate"><span class="pre">Channel.number</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#sonicdb.database.channel.Channel.type_class"><code class="docutils literal notranslate"><span class="pre">Channel.type_class</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#sonicdb.database.channel.Channel.gain"><code class="docutils literal notranslate"><span class="pre">Channel.gain</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#sonicdb.database.channel.Channel.sensor_id"><code class="docutils literal notranslate"><span class="pre">Channel.sensor_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#sonicdb.database.channel.Channel.sensor"><code class="docutils literal notranslate"><span class="pre">Channel.sensor</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#sonicdb.database.channel.Channel.files"><code class="docutils literal notranslate"><span class="pre">Channel.files</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#sonicdb.database.channel.Channel.samples"><code class="docutils literal notranslate"><span class="pre">Channel.samples</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#sonicdb.database.channel.Channel.events"><code class="docutils literal notranslate"><span class="pre">Channel.events</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#sonicdb.database.channel.Channel.dict"><code class="docutils literal notranslate"><span class="pre">Channel.dict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#id0"><code class="docutils literal notranslate"><span class="pre">Channel.events</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#id1"><code class="docutils literal notranslate"><span class="pre">Channel.files</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#id2"><code class="docutils literal notranslate"><span class="pre">Channel.gain</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#sonicdb.database.channel.Channel.get_end"><code class="docutils literal notranslate"><span class="pre">Channel.get_end()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#sonicdb.database.channel.Channel.get_start"><code class="docutils literal notranslate"><span class="pre">Channel.get_start()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#id3"><code class="docutils literal notranslate"><span class="pre">Channel.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#id4"><code class="docutils literal notranslate"><span class="pre">Channel.number</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#id5"><code class="docutils literal notranslate"><span class="pre">Channel.samples</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#id6"><code class="docutils literal notranslate"><span class="pre">Channel.sensor</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#id7"><code class="docutils literal notranslate"><span class="pre">Channel.sensor_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#id8"><code class="docutils literal notranslate"><span class="pre">Channel.type_class</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="sonicdb.database.html#module-sonicdb.database.event">sonicdb.database.event module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="sonicdb.database.html#sonicdb.database.event.Event"><code class="docutils literal notranslate"><span class="pre">Event</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#sonicdb.database.event.Event.id"><code class="docutils literal notranslate"><span class="pre">Event.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#sonicdb.database.event.Event.name"><code class="docutils literal notranslate"><span class="pre">Event.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#sonicdb.database.event.Event.start"><code class="docutils literal notranslate"><span class="pre">Event.start</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#sonicdb.database.event.Event.end"><code class="docutils literal notranslate"><span class="pre">Event.end</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#sonicdb.database.event.Event.description"><code class="docutils literal notranslate"><span class="pre">Event.description</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#sonicdb.database.event.Event.subject_id"><code class="docutils literal notranslate"><span class="pre">Event.subject_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#sonicdb.database.event.Event.subject"><code class="docutils literal notranslate"><span class="pre">Event.subject</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#sonicdb.database.event.Event.samples"><code class="docutils literal notranslate"><span class="pre">Event.samples</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#sonicdb.database.event.Event.channels"><code class="docutils literal notranslate"><span class="pre">Event.channels</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#id9"><code class="docutils literal notranslate"><span class="pre">Event.channels</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#id10"><code class="docutils literal notranslate"><span class="pre">Event.description</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#id11"><code class="docutils literal notranslate"><span class="pre">Event.end</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#id12"><code class="docutils literal notranslate"><span class="pre">Event.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#id13"><code class="docutils literal notranslate"><span class="pre">Event.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#id14"><code class="docutils literal notranslate"><span class="pre">Event.samples</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#id15"><code class="docutils literal notranslate"><span class="pre">Event.start</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#id16"><code class="docutils literal notranslate"><span class="pre">Event.subject</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#id17"><code class="docutils literal notranslate"><span class="pre">Event.subject_id</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="sonicdb.database.html#sonicdb.database.event.EventChannel"><code class="docutils literal notranslate"><span class="pre">EventChannel</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#sonicdb.database.event.EventChannel.event_id"><code class="docutils literal notranslate"><span class="pre">EventChannel.event_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#sonicdb.database.event.EventChannel.event"><code class="docutils literal notranslate"><span class="pre">EventChannel.event</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#sonicdb.database.event.EventChannel.channel_id"><code class="docutils literal notranslate"><span class="pre">EventChannel.channel_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#sonicdb.database.event.EventChannel.channel"><code class="docutils literal notranslate"><span class="pre">EventChannel.channel</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#id18"><code class="docutils literal notranslate"><span class="pre">EventChannel.channel</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#id19"><code class="docutils literal notranslate"><span class="pre">EventChannel.channel_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#id20"><code class="docutils literal notranslate"><span class="pre">EventChannel.event</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#id21"><code class="docutils literal notranslate"><span class="pre">EventChannel.event_id</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="sonicdb.database.html#module-sonicdb.database.sample">sonicdb.database.sample module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="sonicdb.database.html#sonicdb.database.sample.Sample"><code class="docutils literal notranslate"><span class="pre">Sample</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#sonicdb.database.sample.Sample.id"><code class="docutils literal notranslate"><span class="pre">Sample.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#sonicdb.database.sample.Sample.event_id"><code class="docutils literal notranslate"><span class="pre">Sample.event_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#sonicdb.database.sample.Sample.event"><code class="docutils literal notranslate"><span class="pre">Sample.event</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#sonicdb.database.sample.Sample.sensor_id"><code class="docutils literal notranslate"><span class="pre">Sample.sensor_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#sonicdb.database.sample.Sample.sensor"><code class="docutils literal notranslate"><span class="pre">Sample.sensor</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#sonicdb.database.sample.Sample.channel_id"><code class="docutils literal notranslate"><span class="pre">Sample.channel_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#sonicdb.database.sample.Sample.channel"><code class="docutils literal notranslate"><span class="pre">Sample.channel</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#sonicdb.database.sample.Sample.subject_id"><code class="docutils literal notranslate"><span class="pre">Sample.subject_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#sonicdb.database.sample.Sample.subject"><code class="docutils literal notranslate"><span class="pre">Sample.subject</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#sonicdb.database.sample.Sample.datetime"><code class="docutils literal notranslate"><span class="pre">Sample.datetime</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#sonicdb.database.sample.Sample.file_id"><code class="docutils literal notranslate"><span class="pre">Sample.file_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#sonicdb.database.sample.Sample.file"><code class="docutils literal notranslate"><span class="pre">Sample.file</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#id22"><code class="docutils literal notranslate"><span class="pre">Sample.channel</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#id23"><code class="docutils literal notranslate"><span class="pre">Sample.channel_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#id24"><code class="docutils literal notranslate"><span class="pre">Sample.datetime</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#id25"><code class="docutils literal notranslate"><span class="pre">Sample.event</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#id26"><code class="docutils literal notranslate"><span class="pre">Sample.event_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#id27"><code class="docutils literal notranslate"><span class="pre">Sample.file</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#id28"><code class="docutils literal notranslate"><span class="pre">Sample.file_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#sonicdb.database.sample.Sample.get_audio"><code class="docutils literal notranslate"><span class="pre">Sample.get_audio()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#id29"><code class="docutils literal notranslate"><span class="pre">Sample.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#id30"><code class="docutils literal notranslate"><span class="pre">Sample.sensor</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#id31"><code class="docutils literal notranslate"><span class="pre">Sample.sensor_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#id32"><code class="docutils literal notranslate"><span class="pre">Sample.subject</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#id33"><code class="docutils literal notranslate"><span class="pre">Sample.subject_id</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="sonicdb.database.html#module-sonicdb.database.sensor">sonicdb.database.sensor module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="sonicdb.database.html#sonicdb.database.sensor.Sensor"><code class="docutils literal notranslate"><span class="pre">Sensor</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#sonicdb.database.sensor.Sensor.id"><code class="docutils literal notranslate"><span class="pre">Sensor.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#sonicdb.database.sensor.Sensor.name"><code class="docutils literal notranslate"><span class="pre">Sensor.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#sonicdb.database.sensor.Sensor.subname"><code class="docutils literal notranslate"><span class="pre">Sensor.subname</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#sonicdb.database.sensor.Sensor.manufacturer"><code class="docutils literal notranslate"><span class="pre">Sensor.manufacturer</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#sonicdb.database.sensor.Sensor.type_class"><code class="docutils literal notranslate"><span class="pre">Sensor.type_class</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#sonicdb.database.sensor.Sensor.number_of_channels"><code class="docutils literal notranslate"><span class="pre">Sensor.number_of_channels</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#sonicdb.database.sensor.Sensor.channels"><code class="docutils literal notranslate"><span class="pre">Sensor.channels</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#sonicdb.database.sensor.Sensor.samples"><code class="docutils literal notranslate"><span class="pre">Sensor.samples</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#sonicdb.database.sensor.Sensor.files"><code class="docutils literal notranslate"><span class="pre">Sensor.files</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#id34"><code class="docutils literal notranslate"><span class="pre">Sensor.channels</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#id35"><code class="docutils literal notranslate"><span class="pre">Sensor.files</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#id36"><code class="docutils literal notranslate"><span class="pre">Sensor.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#id37"><code class="docutils literal notranslate"><span class="pre">Sensor.manufacturer</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#id38"><code class="docutils literal notranslate"><span class="pre">Sensor.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#id39"><code class="docutils literal notranslate"><span class="pre">Sensor.number_of_channels</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#id40"><code class="docutils literal notranslate"><span class="pre">Sensor.samples</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#id41"><code class="docutils literal notranslate"><span class="pre">Sensor.subname</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#id42"><code class="docutils literal notranslate"><span class="pre">Sensor.type_class</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="sonicdb.database.html#module-sonicdb.database.subject">sonicdb.database.subject module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="sonicdb.database.html#sonicdb.database.subject.Subject"><code class="docutils literal notranslate"><span class="pre">Subject</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#sonicdb.database.subject.Subject.id"><code class="docutils literal notranslate"><span class="pre">Subject.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#sonicdb.database.subject.Subject.name"><code class="docutils literal notranslate"><span class="pre">Subject.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#sonicdb.database.subject.Subject.samples"><code class="docutils literal notranslate"><span class="pre">Subject.samples</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#sonicdb.database.subject.Subject.events"><code class="docutils literal notranslate"><span class="pre">Subject.events</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#id43"><code class="docutils literal notranslate"><span class="pre">Subject.events</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#id44"><code class="docutils literal notranslate"><span class="pre">Subject.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#id45"><code class="docutils literal notranslate"><span class="pre">Subject.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="sonicdb.database.html#id46"><code class="docutils literal notranslate"><span class="pre">Subject.samples</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="sonicdb.database.html#module-sonicdb.database">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">¶</a></h2>
+</section>
+<section id="module-sonicdb.audio">
+<span id="sonicdb-audio-module"></span><h2>sonicdb.audio module<a class="headerlink" href="#module-sonicdb.audio" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="sonicdb.audio.Audio">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sonicdb.audio.</span></span><span class="sig-name descname"><span class="pre">Audio</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filepath</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">audio</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_rate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sonicdb/audio.html#Audio"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sonicdb.audio.Audio" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A class for handling audio files, providing functionalities such as loading, trimming, resampling, filtering, and visualization.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sonicdb.audio.Audio.filepath">
+<span class="sig-name descname"><span class="pre">filepath</span></span><a class="headerlink" href="#sonicdb.audio.Audio.filepath" title="Link to this definition">¶</a></dt>
+<dd><p>Path to the audio file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sonicdb.audio.Audio.filename">
+<span class="sig-name descname"><span class="pre">filename</span></span><a class="headerlink" href="#sonicdb.audio.Audio.filename" title="Link to this definition">¶</a></dt>
+<dd><p>Name of the audio file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sonicdb.audio.Audio.audio">
+<span class="sig-name descname"><span class="pre">audio</span></span><a class="headerlink" href="#sonicdb.audio.Audio.audio" title="Link to this definition">¶</a></dt>
+<dd><p>Audio data as a NumPy array.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sonicdb.audio.Audio.sample_rate">
+<span class="sig-name descname"><span class="pre">sample_rate</span></span><a class="headerlink" href="#sonicdb.audio.Audio.sample_rate" title="Link to this definition">¶</a></dt>
+<dd><p>Sampling rate of the audio.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sonicdb.audio.Audio.duration">
+<span class="sig-name descname"><span class="pre">duration</span></span><a class="headerlink" href="#sonicdb.audio.Audio.duration" title="Link to this definition">¶</a></dt>
+<dd><p>Duration of the audio in seconds.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sonicdb.audio.Audio.length">
+<span class="sig-name descname"><span class="pre">length</span></span><a class="headerlink" href="#sonicdb.audio.Audio.length" title="Link to this definition">¶</a></dt>
+<dd><p>Length of the audio data in samples.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sonicdb.audio.Audio.metadata">
+<span class="sig-name descname"><span class="pre">metadata</span></span><a class="headerlink" href="#sonicdb.audio.Audio.metadata" title="Link to this definition">¶</a></dt>
+<dd><p>Metadata of the audio file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sonicdb.audio.Audio.extension">
+<span class="sig-name descname"><span class="pre">extension</span></span><a class="headerlink" href="#sonicdb.audio.Audio.extension" title="Link to this definition">¶</a></dt>
+<dd><p>File extension of the audio file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sonicdb.audio.Audio.data">
+<span class="sig-name descname"><span class="pre">data</span></span><a class="headerlink" href="#sonicdb.audio.Audio.data" title="Link to this definition">¶</a></dt>
+<dd><p>DataFrame containing audio signal and time-related information.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sonicdb.audio.Audio.start">
+<span class="sig-name descname"><span class="pre">start</span></span><a class="headerlink" href="#sonicdb.audio.Audio.start" title="Link to this definition">¶</a></dt>
+<dd><p>Start time of the audio.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>datetime</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sonicdb.audio.Audio.end">
+<span class="sig-name descname"><span class="pre">end</span></span><a class="headerlink" href="#sonicdb.audio.Audio.end" title="Link to this definition">¶</a></dt>
+<dd><p>End time of the audio.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>datetime</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sonicdb.audio.Audio.add_data">
+<span class="sig-name descname"><span class="pre">add_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filepath</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sonicdb/audio.html#Audio.add_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sonicdb.audio.Audio.add_data" title="Link to this definition">¶</a></dt>
+<dd><p>Append audio data from another file to the current audio object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>filepath</strong> (<em>str</em>) – Path to the audio file to append.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sonicdb.audio.Audio.bandpass_filter">
+<span class="sig-name descname"><span class="pre">bandpass_filter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lowcut</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">highcut</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">order</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'sos'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sonicdb/audio.html#Audio.bandpass_filter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sonicdb.audio.Audio.bandpass_filter" title="Link to this definition">¶</a></dt>
+<dd><p>Apply a bandpass Butterworth filter to the audio.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lowcut</strong> (<em>int</em>) – Low cutoff frequency in Hz.</p></li>
+<li><p><strong>highcut</strong> (<em>int</em>) – High cutoff frequency in Hz.</p></li>
+<li><p><strong>order</strong> (<em>int</em><em>, </em><em>optional</em>) – Filter order. Defaults to 4.</p></li>
+<li><p><strong>type</strong> (<em>str</em><em>, </em><em>optional</em>) – Filter type (‘sos’ or ‘ab’). Defaults to “sos”.</p></li>
+<li><p><strong>overwrite</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to overwrite the current audio. Defaults to False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Filtered audio if overwrite is False.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sonicdb.audio.Audio.envelope">
+<span class="sig-name descname"><span class="pre">envelope</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sonicdb/audio.html#Audio.envelope"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sonicdb.audio.Audio.envelope" title="Link to this definition">¶</a></dt>
+<dd><p>Compute the envelope of the audio signal using the Hilbert transform.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>overwrite</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to overwrite the current audio. Defaults to False.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Envelope of the audio signal.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sonicdb.audio.Audio.fade_in">
+<span class="sig-name descname"><span class="pre">fade_in</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fade_time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'hann'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sonicdb/audio.html#Audio.fade_in"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sonicdb.audio.Audio.fade_in" title="Link to this definition">¶</a></dt>
+<dd><p>Apply a fade-in effect to the audio.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fade_time</strong> (<em>float</em><em>, </em><em>optional</em>) – Duration of the fade-in effect in seconds. Defaults to 0.1.</p></li>
+<li><p><strong>window</strong> (<em>str</em><em>, </em><em>optional</em>) – Window function to use. Defaults to “hann”.</p></li>
+<li><p><strong>overwrite</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to overwrite the current audio. Defaults to False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Audio with fade-in effect if overwrite is False.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sonicdb.audio.Audio.fade_out">
+<span class="sig-name descname"><span class="pre">fade_out</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fade_time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'hann'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sonicdb/audio.html#Audio.fade_out"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sonicdb.audio.Audio.fade_out" title="Link to this definition">¶</a></dt>
+<dd><p>Apply a fade-out effect to the audio.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fade_time</strong> (<em>float</em><em>, </em><em>optional</em>) – Duration of the fade-out effect in seconds. Defaults to 0.1.</p></li>
+<li><p><strong>window</strong> (<em>str</em><em>, </em><em>optional</em>) – Window function to use. Defaults to “hann”.</p></li>
+<li><p><strong>overwrite</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to overwrite the current audio. Defaults to False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Audio with fade-out effect if overwrite is False.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sonicdb.audio.Audio.highpass_filter">
+<span class="sig-name descname"><span class="pre">highpass_filter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cutoff</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">order</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'sos'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sonicdb/audio.html#Audio.highpass_filter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sonicdb.audio.Audio.highpass_filter" title="Link to this definition">¶</a></dt>
+<dd><p>Apply a highpass Butterworth filter to the audio.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cutoff</strong> (<em>int</em>) – Cutoff frequency in Hz.</p></li>
+<li><p><strong>order</strong> (<em>int</em><em>, </em><em>optional</em>) – Filter order. Defaults to 4.</p></li>
+<li><p><strong>overwrite</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to overwrite the current audio. Defaults to False.</p></li>
+<li><p><strong>type</strong> (<em>str</em><em>, </em><em>optional</em>) – Filter type (‘sos’ or ‘ab’). Defaults to “sos”.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Filtered audio if overwrite is False.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sonicdb.audio.Audio.lowpass_filter">
+<span class="sig-name descname"><span class="pre">lowpass_filter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cutoff</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">order</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'sos'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sonicdb/audio.html#Audio.lowpass_filter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sonicdb.audio.Audio.lowpass_filter" title="Link to this definition">¶</a></dt>
+<dd><p>Apply a lowpass Butterworth filter to the audio.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cutoff</strong> (<em>int</em>) – Cutoff frequency in Hz.</p></li>
+<li><p><strong>order</strong> (<em>int</em><em>, </em><em>optional</em>) – Filter order. Defaults to 4.</p></li>
+<li><p><strong>overwrite</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to overwrite the current audio. Defaults to False.</p></li>
+<li><p><strong>type</strong> (<em>str</em><em>, </em><em>optional</em>) – Filter type (‘sos’ or ‘ab’). Defaults to “sos”.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Filtered audio if overwrite is False.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sonicdb.audio.Audio.plot_envelope">
+<span class="sig-name descname"><span class="pre">plot_envelope</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time_format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'datetime'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sonicdb/audio.html#Audio.plot_envelope"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sonicdb.audio.Audio.plot_envelope" title="Link to this definition">¶</a></dt>
+<dd><p>Plot the envelope of the audio signal.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>time_format</strong> (<em>str</em><em>, </em><em>optional</em>) – Format of the time axis (‘datetime’, ‘samples’, ‘seconds’, ‘ms’). Defaults to “datetime”.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Figure and axis objects.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sonicdb.audio.Audio.plot_melspectrogram">
+<span class="sig-name descname"><span class="pre">plot_melspectrogram</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">window</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'hann'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nmels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8192</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8192</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nfft</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8192</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">noverlap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4096</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nperseg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8192</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zmin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zmax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">showscale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'jet'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aspect</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'datetime'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fmin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fmax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sonicdb/audio.html#Audio.plot_melspectrogram"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sonicdb.audio.Audio.plot_melspectrogram" title="Link to this definition">¶</a></dt>
+<dd><p>Plot the mel spectrogram of the audio.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>window</strong> (<em>str</em><em>, </em><em>optional</em>) – Window function to use. Defaults to “hann”.</p></li>
+<li><p><strong>nmels</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of mel bands to generate. Defaults to 8192.</p></li>
+<li><p><strong>window_size</strong> (<em>int</em><em>, </em><em>optional</em>) – Size of the window in samples. Defaults to 8192.</p></li>
+<li><p><strong>nfft</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of FFT points. Defaults to 8192.</p></li>
+<li><p><strong>noverlap</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of overlapping samples. Defaults to 4096.</p></li>
+<li><p><strong>nperseg</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of samples per segment. Defaults to 8192.</p></li>
+<li><p><strong>zmin</strong> (<em>int</em><em>, </em><em>optional</em>) – Minimum z-value for color scale. Defaults to None.</p></li>
+<li><p><strong>zmax</strong> (<em>int</em><em>, </em><em>optional</em>) – Maximum z-value for color scale. Defaults to None.</p></li>
+<li><p><strong>gain</strong> (<em>int</em><em>, </em><em>optional</em>) – Gain to apply to the spectrogram. Defaults to 0.</p></li>
+<li><p><strong>showscale</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to show color scale. Defaults to False.</p></li>
+<li><p><strong>cmap</strong> (<em>str</em><em>, </em><em>optional</em>) – Colormap to use. Defaults to “jet”.</p></li>
+<li><p><strong>aspect</strong> (<em>str</em><em>, </em><em>optional</em>) – Aspect ratio. Defaults to “auto”.</p></li>
+<li><p><strong>time_format</strong> (<em>str</em><em>, </em><em>optional</em>) – Format of the time axis (‘datetime’, ‘samples’, ‘seconds’, ‘ms’). Defaults to “datetime”.</p></li>
+<li><p><strong>ax</strong> (<em>matplotlib.axes.Axes</em><em>, </em><em>optional</em>) – Axis object to plot on. Defaults to None.</p></li>
+<li><p><strong>fmin</strong> (<em>int</em><em>, </em><em>optional</em>) – Minimum frequency. Defaults to 0.</p></li>
+<li><p><strong>fmax</strong> (<em>int</em><em>, </em><em>optional</em>) – Maximum frequency. Defaults to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Figure and axis objects if a figure is created.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sonicdb.audio.Audio.plot_psd">
+<span class="sig-name descname"><span class="pre">plot_psd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">window_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4096</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sonicdb/audio.html#Audio.plot_psd"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sonicdb.audio.Audio.plot_psd" title="Link to this definition">¶</a></dt>
+<dd><p>Plot the power spectral density (PSD) of the audio.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>window_size</strong> (<em>int</em><em>, </em><em>optional</em>) – Size of the window in samples. Defaults to 4096.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Figure and axis objects.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sonicdb.audio.Audio.plot_spectrogram">
+<span class="sig-name descname"><span class="pre">plot_spectrogram</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">window</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'hann'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8192</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nfft</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8192</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">noverlap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4096</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nperseg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8192</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zmin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zmax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">showscale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'jet'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aspect</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'datetime'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fig</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sonicdb/audio.html#Audio.plot_spectrogram"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sonicdb.audio.Audio.plot_spectrogram" title="Link to this definition">¶</a></dt>
+<dd><p>Plot the spectrogram of the audio.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>window</strong> (<em>str</em><em>, </em><em>optional</em>) – Window function to use. Defaults to “hann”.</p></li>
+<li><p><strong>window_size</strong> (<em>int</em><em>, </em><em>optional</em>) – Size of the window in samples. Defaults to 8192.</p></li>
+<li><p><strong>nfft</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of FFT points. Defaults to 8192.</p></li>
+<li><p><strong>noverlap</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of overlapping samples. Defaults to 4096.</p></li>
+<li><p><strong>nperseg</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of samples per segment. Defaults to 8192.</p></li>
+<li><p><strong>zmin</strong> (<em>int</em><em>, </em><em>optional</em>) – Minimum z-value for color scale. Defaults to None.</p></li>
+<li><p><strong>zmax</strong> (<em>int</em><em>, </em><em>optional</em>) – Maximum z-value for color scale. Defaults to None.</p></li>
+<li><p><strong>gain</strong> (<em>int</em><em>, </em><em>optional</em>) – Gain to apply to the spectrogram. Defaults to 0.</p></li>
+<li><p><strong>showscale</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to show color scale. Defaults to False.</p></li>
+<li><p><strong>cmap</strong> (<em>str</em><em>, </em><em>optional</em>) – Colormap to use. Defaults to “jet”.</p></li>
+<li><p><strong>aspect</strong> (<em>str</em><em>, </em><em>optional</em>) – Aspect ratio. Defaults to “auto”.</p></li>
+<li><p><strong>time_format</strong> (<em>str</em><em>, </em><em>optional</em>) – Format of the time axis (‘datetime’, ‘samples’, ‘seconds’, ‘ms’). Defaults to “datetime”.</p></li>
+<li><p><strong>fig</strong> (<em>matplotlib.figure.Figure</em><em>, </em><em>optional</em>) – Figure object to plot on. Defaults to None.</p></li>
+<li><p><strong>ax</strong> (<em>matplotlib.axes.Axes</em><em>, </em><em>optional</em>) – Axis object to plot on. Defaults to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Figure and axis objects if a figure is created.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sonicdb.audio.Audio.plot_waveform">
+<span class="sig-name descname"><span class="pre">plot_waveform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time_format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'datetime'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sonicdb/audio.html#Audio.plot_waveform"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sonicdb.audio.Audio.plot_waveform" title="Link to this definition">¶</a></dt>
+<dd><p>Plot the waveform of the audio.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>time_format</strong> (<em>str</em><em>, </em><em>optional</em>) – Format of the time axis (‘datetime’, ‘samples’, ‘seconds’, ‘ms’). Defaults to “datetime”.</p></li>
+<li><p><strong>ax</strong> (<em>matplotlib.axes.Axes</em><em>, </em><em>optional</em>) – Axis object to plot on. Defaults to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Figure and axis objects if a figure is created.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sonicdb.audio.Audio.psd">
+<span class="sig-name descname"><span class="pre">psd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">window_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4096</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sonicdb/audio.html#Audio.psd"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sonicdb.audio.Audio.psd" title="Link to this definition">¶</a></dt>
+<dd><p>Compute the power spectral density (PSD) of the audio.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>window_size</strong> (<em>int</em><em>, </em><em>optional</em>) – Size of the window in samples. Defaults to 4096.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Frequency and power values.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sonicdb.audio.Audio.resample">
+<span class="sig-name descname"><span class="pre">resample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sample_rate</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sonicdb/audio.html#Audio.resample"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sonicdb.audio.Audio.resample" title="Link to this definition">¶</a></dt>
+<dd><p>Resample the audio to a new sample rate.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>sample_rate</strong> (<em>int</em>) – Target sample rate.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sonicdb.audio.Audio.spectrogram">
+<span class="sig-name descname"><span class="pre">spectrogram</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">window</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'hann'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8192</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nfft</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8192</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">noverlap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4096</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nperseg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8192</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'datetime'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sonicdb/audio.html#Audio.spectrogram"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sonicdb.audio.Audio.spectrogram" title="Link to this definition">¶</a></dt>
+<dd><p>Generate a spectrogram of the audio.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>window</strong> (<em>str</em><em>, </em><em>optional</em>) – Window function to use. Defaults to “hann”.</p></li>
+<li><p><strong>window_size</strong> (<em>int</em><em>, </em><em>optional</em>) – Size of the window in samples. Defaults to 8192.</p></li>
+<li><p><strong>nfft</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of FFT points. Defaults to 8192.</p></li>
+<li><p><strong>noverlap</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of overlapping samples. Defaults to 4096.</p></li>
+<li><p><strong>nperseg</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of samples per segment. Defaults to 8192.</p></li>
+<li><p><strong>time_format</strong> (<em>str</em><em>, </em><em>optional</em>) – Format of the time axis (‘datetime’, ‘samples’, ‘seconds’, ‘ms’). Defaults to “datetime”.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Time, frequency, and power spectral density (Pxx).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sonicdb.audio.Audio.trim">
+<span class="sig-name descname"><span class="pre">trim</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'datetime'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">restart</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sonicdb/audio.html#Audio.trim"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sonicdb.audio.Audio.trim" title="Link to this definition">¶</a></dt>
+<dd><p>Trim the audio to a specified start and end time or length.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>start</strong> (<em>datetime</em><em> | </em><em>str</em><em> | </em><em>float</em><em> | </em><em>int</em>) – Start time of the trim.</p></li>
+<li><p><strong>end</strong> (<em>datetime</em><em> | </em><em>str</em><em> | </em><em>float</em><em> | </em><em>int</em><em>, </em><em>optional</em>) – End time of the trim. Defaults to None.</p></li>
+<li><p><strong>length</strong> (<em>float</em><em>, </em><em>optional</em>) – Length of the trimmed audio in seconds, milliseconds, or samples. Defaults to None.</p></li>
+<li><p><strong>time_format</strong> (<em>str</em><em>, </em><em>optional</em>) – Format of the time (‘datetime’, ‘samples’, ‘seconds’, ‘ms’). Defaults to “datetime”.</p></li>
+<li><p><strong>restart</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to reset the time indices. Defaults to False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A new Audio object with the trimmed data.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#sonicdb.audio.Audio" title="sonicdb.audio.Audio">Audio</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sonicdb.audio.Audio.write_audio">
+<span class="sig-name descname"><span class="pre">write_audio</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filepath</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sonicdb/audio.html#Audio.write_audio"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sonicdb.audio.Audio.write_audio" title="Link to this definition">¶</a></dt>
+<dd><p>Write the audio data to a file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>filepath</strong> (<em>str</em>) – Path to save the audio file. The file will be saved as a WAV file.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sonicdb.audio.autocorrelation">
+<span class="sig-prename descclassname"><span class="pre">sonicdb.audio.</span></span><span class="sig-name descname"><span class="pre">autocorrelation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signal</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sonicdb/audio.html#autocorrelation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sonicdb.audio.autocorrelation" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sonicdb.audio.average_hold">
+<span class="sig-prename descclassname"><span class="pre">sonicdb.audio.</span></span><span class="sig-name descname"><span class="pre">average_hold</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1024</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_rate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">24000</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sonicdb/audio.html#average_hold"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sonicdb.audio.average_hold" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sonicdb.audio.butter_bandpass">
+<span class="sig-prename descclassname"><span class="pre">sonicdb.audio.</span></span><span class="sig-name descname"><span class="pre">butter_bandpass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lowcut</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">highcut</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">order</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'sos'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sonicdb/audio.html#butter_bandpass"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sonicdb.audio.butter_bandpass" title="Link to this definition">¶</a></dt>
+<dd><p>Design a bandpass Butterworth filter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lowcut</strong> (<em>float</em>) – Low cutoff frequency in Hz.</p></li>
+<li><p><strong>highcut</strong> (<em>float</em>) – High cutoff frequency in Hz.</p></li>
+<li><p><strong>fs</strong> (<em>float</em>) – Sampling rate in Hz.</p></li>
+<li><p><strong>order</strong> (<em>int</em><em>, </em><em>optional</em>) – Order of the filter. Defaults to 5.</p></li>
+<li><p><strong>type</strong> (<em>str</em><em>, </em><em>optional</em>) – Type of the filter (‘sos’ or ‘ab’). Defaults to “sos”.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Filter coefficients.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray | tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sonicdb.audio.butter_bandpass_filter">
+<span class="sig-prename descclassname"><span class="pre">sonicdb.audio.</span></span><span class="sig-name descname"><span class="pre">butter_bandpass_filter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lowcut</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">highcut</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">order</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'sos'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sonicdb/audio.html#butter_bandpass_filter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sonicdb.audio.butter_bandpass_filter" title="Link to this definition">¶</a></dt>
+<dd><p>Apply a bandpass Butterworth filter to the data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>array-like</em>) – Input data to be filtered.</p></li>
+<li><p><strong>lowcut</strong> (<em>float</em>) – Low cutoff frequency in Hz.</p></li>
+<li><p><strong>highcut</strong> (<em>float</em>) – High cutoff frequency in Hz.</p></li>
+<li><p><strong>fs</strong> (<em>float</em>) – Sampling rate in Hz.</p></li>
+<li><p><strong>order</strong> (<em>int</em><em>, </em><em>optional</em>) – Order of the filter. Defaults to 5.</p></li>
+<li><p><strong>type</strong> (<em>str</em><em>, </em><em>optional</em>) – Type of the filter (‘sos’ or ‘ab’). Defaults to “sos”.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Filtered data.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>array-like</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sonicdb.audio.butter_highpass">
+<span class="sig-prename descclassname"><span class="pre">sonicdb.audio.</span></span><span class="sig-name descname"><span class="pre">butter_highpass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cutoff</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">order</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'sos'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sonicdb/audio.html#butter_highpass"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sonicdb.audio.butter_highpass" title="Link to this definition">¶</a></dt>
+<dd><p>Design a highpass Butterworth filter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cutoff</strong> (<em>float</em>) – Cutoff frequency in Hz.</p></li>
+<li><p><strong>fs</strong> (<em>float</em>) – Sampling rate in Hz.</p></li>
+<li><p><strong>order</strong> (<em>int</em>) – Order of the filter.</p></li>
+<li><p><strong>type</strong> (<em>str</em><em>, </em><em>optional</em>) – Type of the filter (‘sos’ or ‘ab’). Defaults to “sos”.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Filter coefficients.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray | tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sonicdb.audio.butter_highpass_filter">
+<span class="sig-prename descclassname"><span class="pre">sonicdb.audio.</span></span><span class="sig-name descname"><span class="pre">butter_highpass_filter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cutoff</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">order</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'sos'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sonicdb/audio.html#butter_highpass_filter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sonicdb.audio.butter_highpass_filter" title="Link to this definition">¶</a></dt>
+<dd><p>Apply a highpass Butterworth filter to the data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>array-like</em>) – Input data to be filtered.</p></li>
+<li><p><strong>cutoff</strong> (<em>float</em>) – Cutoff frequency in Hz.</p></li>
+<li><p><strong>fs</strong> (<em>float</em>) – Sampling rate in Hz.</p></li>
+<li><p><strong>order</strong> (<em>int</em><em>, </em><em>optional</em>) – Order of the filter. Defaults to 5.</p></li>
+<li><p><strong>type</strong> (<em>str</em><em>, </em><em>optional</em>) – Type of the filter (‘sos’ or ‘ab’). Defaults to “sos”.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Filtered data.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>array-like</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sonicdb.audio.butter_lowpass">
+<span class="sig-prename descclassname"><span class="pre">sonicdb.audio.</span></span><span class="sig-name descname"><span class="pre">butter_lowpass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cutoff</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">order</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'sos'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sonicdb/audio.html#butter_lowpass"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sonicdb.audio.butter_lowpass" title="Link to this definition">¶</a></dt>
+<dd><p>Design a lowpass Butterworth filter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cutoff</strong> (<em>float</em>) – Cutoff frequency in Hz.</p></li>
+<li><p><strong>fs</strong> (<em>float</em>) – Sampling rate in Hz.</p></li>
+<li><p><strong>order</strong> (<em>int</em>) – Filter order.</p></li>
+<li><p><strong>type</strong> (<em>str</em><em>, </em><em>optional</em>) – Filter type (‘sos’ or ‘ab’). Defaults to “sos”.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Filter coefficients.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray | tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sonicdb.audio.butter_lowpass_filter">
+<span class="sig-prename descclassname"><span class="pre">sonicdb.audio.</span></span><span class="sig-name descname"><span class="pre">butter_lowpass_filter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cutoff</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">order</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'sos'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sonicdb/audio.html#butter_lowpass_filter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sonicdb.audio.butter_lowpass_filter" title="Link to this definition">¶</a></dt>
+<dd><p>Apply a lowpass Butterworth filter to the data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>array-like</em>) – Input data to be filtered.</p></li>
+<li><p><strong>cutoff</strong> (<em>float</em>) – Cutoff frequency in Hz.</p></li>
+<li><p><strong>fs</strong> (<em>float</em>) – Sampling rate in Hz.</p></li>
+<li><p><strong>order</strong> (<em>int</em><em>, </em><em>optional</em>) – Order of the filter. Defaults to 5.</p></li>
+<li><p><strong>type</strong> (<em>str</em><em>, </em><em>optional</em>) – Type of the filter (‘sos’ or ‘ab’). Defaults to “sos”.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Filtered data.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>array-like</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sonicdb.audio.combine_audio">
+<span class="sig-prename descclassname"><span class="pre">sonicdb.audio.</span></span><span class="sig-name descname"><span class="pre">combine_audio</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">list_of_files</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sonicdb/audio.html#combine_audio"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sonicdb.audio.combine_audio" title="Link to this definition">¶</a></dt>
+<dd><p>Combine multiple audio files into one.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>list_of_files</strong> (<em>list</em>) – List of file paths to combine.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Combined audio object.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#sonicdb.audio.Audio" title="sonicdb.audio.Audio">Audio</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sonicdb.audio.echo">
+<span class="sig-prename descclassname"><span class="pre">sonicdb.audio.</span></span><span class="sig-name descname"><span class="pre">echo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_rate</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delay</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">decay</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sonicdb/audio.html#echo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sonicdb.audio.echo" title="Link to this definition">¶</a></dt>
+<dd><p>Adds echo to audio data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>array</em><em> | </em><em>np.array</em><em> | </em><em>pd.Series</em>) – audio data to add echo to</p></li>
+<li><p><strong>sample_rate</strong> (<em>int</em><em> | </em><em>float</em>) – sample rate of audio data</p></li>
+<li><p><strong>delay</strong> (<em>int</em><em> | </em><em>float</em><em>, </em><em>optional</em>) – delay in the echo. Defaults to 0.1.</p></li>
+<li><p><strong>decay</strong> (<em>int</em><em> | </em><em>float</em><em>, </em><em>optional</em>) – decay of the echo. Defaults to 0.5.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>_description_</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list|np.array|pd.Series</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sonicdb.audio.fade_in">
+<span class="sig-prename descclassname"><span class="pre">sonicdb.audio.</span></span><span class="sig-name descname"><span class="pre">fade_in</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_rate</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fade_time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'hann'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sonicdb/audio.html#fade_in"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sonicdb.audio.fade_in" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sonicdb.audio.fade_out">
+<span class="sig-prename descclassname"><span class="pre">sonicdb.audio.</span></span><span class="sig-name descname"><span class="pre">fade_out</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_rate</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fade_time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'hann'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sonicdb/audio.html#fade_out"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sonicdb.audio.fade_out" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sonicdb.audio.mp3_to_wav">
+<span class="sig-prename descclassname"><span class="pre">sonicdb.audio.</span></span><span class="sig-name descname"><span class="pre">mp3_to_wav</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'wav'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sonicdb/audio.html#mp3_to_wav"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sonicdb.audio.mp3_to_wav" title="Link to this definition">¶</a></dt>
+<dd><p>Converts mp3 file to wav file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file</strong> (<em>file</em>) – filepath of input</p></li>
+<li><p><strong>output</strong> (<em>str</em>) – filepath of output</p></li>
+<li><p><strong>output_format</strong> (<em>str</em><em>, </em><em>optional</em>) – Output format. Defaults to “wav”.</p></li>
+<li><p><strong>input</strong> (<em>str</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sonicdb.audio.peak_hold">
+<span class="sig-prename descclassname"><span class="pre">sonicdb.audio.</span></span><span class="sig-name descname"><span class="pre">peak_hold</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8192</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_rate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">24000</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sonicdb/audio.html#peak_hold"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sonicdb.audio.peak_hold" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sonicdb.audio.psd">
+<span class="sig-prename descclassname"><span class="pre">sonicdb.audio.</span></span><span class="sig-name descname"><span class="pre">psd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_rate</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4096</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'blackmanharris'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scaling</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'spectrum'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'amplitude'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sonicdb/audio.html#psd"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sonicdb.audio.psd" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>list</em>)</p></li>
+<li><p><strong>sample_rate</strong> (<em>int</em>)</p></li>
+<li><p><strong>window_size</strong> (<em>int</em>)</p></li>
+<li><p><strong>window</strong> (<em>str</em>)</p></li>
+<li><p><strong>scaling</strong> (<em>str</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sonicdb.audio.psd2">
+<span class="sig-prename descclassname"><span class="pre">sonicdb.audio.</span></span><span class="sig-name descname"><span class="pre">psd2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_rate</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4096</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sonicdb/audio.html#psd2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sonicdb.audio.psd2" title="Link to this definition">¶</a></dt>
+<dd><p>Compute the power spectral density of a signal.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>array</em>) – signal</p></li>
+<li><p><strong>sample_rate</strong> (<em>int</em>) – sample rate of the signal</p></li>
+<li><p><strong>sample_window</strong> (<em>int</em><em>, </em><em>optional</em>) – length of the window to use for the FFT. Defaults to 4096.</p></li>
+<li><p><strong>window_size</strong> (<em>int</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>power spectral density</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sonicdb.audio.spectral_subtraction">
+<span class="sig-prename descclassname"><span class="pre">sonicdb.audio.</span></span><span class="sig-name descname"><span class="pre">spectral_subtraction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">noise</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scaling_factor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sonicdb/audio.html#spectral_subtraction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sonicdb.audio.spectral_subtraction" title="Link to this definition">¶</a></dt>
+<dd><p>Perform spectral subtraction with optional scaling of the noise spectrum.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>signal</strong> (<em>array-like</em>) – The input signal.</p></li>
+<li><p><strong>noise</strong> (<em>array-like</em>) – The noise signal.</p></li>
+<li><p><strong>scaling_factor</strong> (<em>float</em>) – A factor to scale the noise spectrum before subtraction.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The cleaned signal after spectral subtraction.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>array-like</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sonicdb.audio.spectrogram">
+<span class="sig-prename descclassname"><span class="pre">sonicdb.audio.</span></span><span class="sig-name descname"><span class="pre">spectrogram</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_rate</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8192</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'hann'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nfft</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4096</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">noverlap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4096</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nperseg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8192</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'datetime'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sonicdb/audio.html#spectrogram"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sonicdb.audio.spectrogram" title="Link to this definition">¶</a></dt>
+<dd><p>Generates spectrogram of audio</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>list</em><em> or </em><em>pd.Series</em>) – Data to generate spectrogram of</p></li>
+<li><p><strong>sample_rate</strong> (<em>int</em>) – Sample rate of data</p></li>
+<li><p><strong>window_size</strong> (<em>int</em><em>, </em><em>optional</em>) – Window size in samples. Defaults to 8192.</p></li>
+<li><p><strong>nfft</strong> (<em>int</em><em>, </em><em>optional</em>) – FFT number. Defaults to 4096.</p></li>
+<li><p><strong>noverlap</strong> (<em>int</em><em>, </em><em>optional</em>) – Overlap amount in samples. Defaults to 4096.</p></li>
+<li><p><strong>nperseg</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of samples per segment. Defaults to 8192.</p></li>
+<li><p><strong>start</strong> (<em>datetime</em><em>, </em><em>optional</em>) – Start time. Defaults to None.</p></li>
+<li><p><strong>end</strong> (<em>datetime</em><em>, </em><em>optional</em>) – End time. Defaults to None.</p></li>
+<li><p><strong>time_format</strong> (<em>str</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>time, frequency, Pxx</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sonicdb.audio.wavelet_denoise">
+<span class="sig-prename descclassname"><span class="pre">sonicdb.audio.</span></span><span class="sig-name descname"><span class="pre">wavelet_denoise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wavelet</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'db4'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sonicdb/audio.html#wavelet_denoise"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sonicdb.audio.wavelet_denoise" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sonicdb.audio.write_audio">
+<span class="sig-prename descclassname"><span class="pre">sonicdb.audio.</span></span><span class="sig-name descname"><span class="pre">write_audio</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filepath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_rate</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sonicdb/audio.html#write_audio"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sonicdb.audio.write_audio" title="Link to this definition">¶</a></dt>
+<dd><p>Writes audiofile of data with set samplerate. Omit extension, will output only wav.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>list</em><em> or </em><em>pd.Series</em>) – data to output</p></li>
+<li><p><strong>filepath</strong> (<em>str</em>) – filepath of output</p></li>
+<li><p><strong>sample_rate</strong> (<em>int</em>) – desired file sample rate</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-sonicdb.models">
+<span id="sonicdb-models-module"></span><h2>sonicdb.models module<a class="headerlink" href="#module-sonicdb.models" title="Link to this heading">¶</a></h2>
+</section>
+<section id="module-sonicdb.sonic">
+<span id="sonicdb-sonic-module"></span><h2>sonicdb.sonic module<a class="headerlink" href="#module-sonicdb.sonic" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="sonicdb.sonic.Database">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sonicdb.sonic.</span></span><span class="sig-name descname"><span class="pre">Database</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sonicdb/sonic.html#Database"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sonicdb.sonic.Database" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>SONIC Database class</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>db</strong> (<em>str</em>)</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sonicdb.sonic.Database.get_audio">
+<span class="sig-name descname"><span class="pre">get_audio</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">event</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sensor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel_number</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sonicdb/sonic.html#Database.get_audio"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sonicdb.sonic.Database.get_audio" title="Link to this definition">¶</a></dt>
+<dd><p>Get audio data from the database.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>start</strong> (<em>datetime</em>) – Start time of the audio data.</p></li>
+<li><p><strong>end</strong> (<em>datetime</em>) – End time of the audio data.</p></li>
+<li><p><strong>event</strong> (<a class="reference internal" href="sonicdb.database.html#sonicdb.database.event.Event" title="sonicdb.database.event.Event"><em>Event</em></a>) – Event object to get the audio data from.</p></li>
+<li><p><strong>sensor</strong> (<a class="reference internal" href="sonicdb.database.html#sonicdb.database.sensor.Sensor" title="sonicdb.database.sensor.Sensor"><em>Sensor</em></a>) – Sensor object to get the audio data from.</p></li>
+<li><p><strong>channel</strong> (<a class="reference internal" href="sonicdb.database.html#sonicdb.database.channel.Channel" title="sonicdb.database.channel.Channel"><em>Channel</em></a>) – Channel object to get the audio data from.</p></li>
+<li><p><strong>channel_number</strong> (<em>int</em>) – Channel number to get the audio data from.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Audio object containing the audio data.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#sonicdb.audio.Audio" title="sonicdb.audio.Audio">audio.Audio</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sonicdb.sonic.Database.get_channel">
+<span class="sig-name descname"><span class="pre">get_channel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">channel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sensor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sonicdb/sonic.html#Database.get_channel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sonicdb.sonic.Database.get_channel" title="Link to this definition">¶</a></dt>
+<dd><p>Get a channel from the database.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>channel</strong> (<a class="reference internal" href="sonicdb.database.html#sonicdb.database.channel.Channel" title="sonicdb.database.channel.Channel"><em>Channel</em></a><em> | </em><em>int</em><em> | </em><em>dict</em><em>[</em><em>str</em><em>, </em><em>int</em><em>]</em>) – Channel object, channel ID, or channel details as a dictionary.
+If a dictionary is passed, it should contain the key “number”.</p></li>
+<li><p><strong>sensor</strong> (<a class="reference internal" href="sonicdb.database.html#sonicdb.database.sensor.Sensor" title="sonicdb.database.sensor.Sensor"><em>Sensor</em></a><em> | </em><em>None</em>) – Sensor object or sensor ID associated with the channel.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Channel object if found, None otherwise.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="sonicdb.database.html#sonicdb.database.channel.Channel" title="sonicdb.database.channel.Channel">Channel</a> | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sonicdb.sonic.Database.get_sensor">
+<span class="sig-name descname"><span class="pre">get_sensor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sensor</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sonicdb/sonic.html#Database.get_sensor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sonicdb.sonic.Database.get_sensor" title="Link to this definition">¶</a></dt>
+<dd><p>Get a sensor from the database.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>sensor</strong> (<a class="reference internal" href="sonicdb.database.html#sonicdb.database.sensor.Sensor" title="sonicdb.database.sensor.Sensor"><em>Sensor</em></a><em> | </em><em>int</em><em> | </em><em>dict</em><em>[</em><em>str</em><em>, </em><em>int</em><em>] </em><em>| </em><em>str</em>) – Sensor object, sensor ID, or sensor name.
+If a dictionary is passed, it should contain the keys “name” and “subname”.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Sensor object if found, None otherwise.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="sonicdb.database.html#sonicdb.database.sensor.Sensor" title="sonicdb.database.sensor.Sensor">Sensor</a> | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sonicdb.sonic.Database.get_subject">
+<span class="sig-name descname"><span class="pre">get_subject</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subject</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sonicdb/sonic.html#Database.get_subject"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sonicdb.sonic.Database.get_subject" title="Link to this definition">¶</a></dt>
+<dd><p>Get a subject from the database.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>subject</strong> (<a class="reference internal" href="sonicdb.database.html#sonicdb.database.subject.Subject" title="sonicdb.database.subject.Subject"><em>Subject</em></a><em> | </em><em>int</em><em> | </em><em>dict</em><em>[</em><em>str</em><em>, </em><em>int</em><em>] </em><em>| </em><em>str</em>) – Subject object, subject ID, or subject name.
+If a dictionary is passed, it should contain the key “name”.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Subject object if found, None otherwise.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="sonicdb.database.html#sonicdb.database.subject.Subject" title="sonicdb.database.subject.Subject">Subject</a> | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sonicdb.sonic.Database.sample_database">
+<span class="sig-name descname"><span class="pre">sample_database</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">duration</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">60</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overlap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">events_only</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sonicdb/sonic.html#Database.sample_database"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sonicdb.sonic.Database.sample_database" title="Link to this definition">¶</a></dt>
+<dd><p>Populates the sample table with the audio data segmented by the specified duration and overlap.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>duration</strong> (<em>int</em><em>, </em><em>optional</em>) – Duration of each sample in seconds. Defaults to 60.</p></li>
+<li><p><strong>overlap</strong> (<em>int</em><em>, </em><em>optional</em>) – Overlap between samples in seconds. Defaults to 0.</p></li>
+<li><p><strong>events_only</strong> (<em>bool</em>)</p></li>
+<li><p><strong>to_file</strong> (<em>bool</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sonicdb.sonic.Database.session">
+<span class="sig-name descname"><span class="pre">session</span></span><a class="headerlink" href="#sonicdb.sonic.Database.session" title="Link to this definition">¶</a></dt>
+<dd><p>Inherits the DBSession class from SQLAlchemy. <a class="reference external" href="https://docs.sqlalchemy.org/en/14/orm/session.html">Available here</a>.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-sonicdb.utilities">
+<span id="sonicdb-utilities-module"></span><h2>sonicdb.utilities module<a class="headerlink" href="#module-sonicdb.utilities" title="Link to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="sonicdb.utilities.lower_keys">
+<span class="sig-prename descclassname"><span class="pre">sonicdb.utilities.</span></span><span class="sig-name descname"><span class="pre">lower_keys</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tree</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sonicdb/utilities.html#lower_keys"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sonicdb.utilities.lower_keys" title="Link to this definition">¶</a></dt>
+<dd><p>Normalize a dictionary to have lowercase and snake_case keys.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>tree</strong> (<em>dict</em>) – Dictionary to normalize.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Normalized dictionary.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict[str, int]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sonicdb.utilities.metadata">
+<span class="sig-prename descclassname"><span class="pre">sonicdb.utilities.</span></span><span class="sig-name descname"><span class="pre">metadata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filepath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extended</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sonicdb/utilities.html#metadata"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sonicdb.utilities.metadata" title="Link to this definition">¶</a></dt>
+<dd><p>Generate metadata for a file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filepath</strong> (<em>str</em>) – Filepath of the file.</p></li>
+<li><p><strong>extended</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to include extended metadata. Defaults to False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Metadata of the file.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sonicdb.utilities.metadatas">
+<span class="sig-prename descclassname"><span class="pre">sonicdb.utilities.</span></span><span class="sig-name descname"><span class="pre">metadatas</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filepaths</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extended</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stevens</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sonicdb/utilities.html#metadatas"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sonicdb.utilities.metadatas" title="Link to this definition">¶</a></dt>
+<dd><p>Generate metadata for multiple files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filepaths</strong> (<em>list</em>) – List of filepaths.</p></li>
+<li><p><strong>extended</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to include extended metadata. Defaults to False.</p></li>
+<li><p><strong>stevens</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to adjust metadata for Stevens’ format. Defaults to False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Metadata of the files.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sonicdb.utilities.read_datetime">
+<span class="sig-prename descclassname"><span class="pre">sonicdb.utilities.</span></span><span class="sig-name descname"><span class="pre">read_datetime</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">string</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sonicdb/utilities.html#read_datetime"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sonicdb.utilities.read_datetime" title="Link to this definition">¶</a></dt>
+<dd><p>Read and convert a datetime string to a datetime object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>string</strong> (<em>str</em>) – Datetime string to convert.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Converted datetime object.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>datetime</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-sonicdb">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-sonicdb" title="Link to this heading">¶</a></h2>
+<p>sonicdb.</p>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, Daniel Kadyrov
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">SONIC API</a><ul>
+<li><a class="reference internal" href="#subpackages">Subpackages</a></li>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-sonicdb.audio">sonicdb.audio module</a><ul>
+<li><a class="reference internal" href="#sonicdb.audio.Audio"><code class="docutils literal notranslate"><span class="pre">Audio</span></code></a><ul>
+<li><a class="reference internal" href="#sonicdb.audio.Audio.filepath"><code class="docutils literal notranslate"><span class="pre">Audio.filepath</span></code></a></li>
+<li><a class="reference internal" href="#sonicdb.audio.Audio.filename"><code class="docutils literal notranslate"><span class="pre">Audio.filename</span></code></a></li>
+<li><a class="reference internal" href="#sonicdb.audio.Audio.audio"><code class="docutils literal notranslate"><span class="pre">Audio.audio</span></code></a></li>
+<li><a class="reference internal" href="#sonicdb.audio.Audio.sample_rate"><code class="docutils literal notranslate"><span class="pre">Audio.sample_rate</span></code></a></li>
+<li><a class="reference internal" href="#sonicdb.audio.Audio.duration"><code class="docutils literal notranslate"><span class="pre">Audio.duration</span></code></a></li>
+<li><a class="reference internal" href="#sonicdb.audio.Audio.length"><code class="docutils literal notranslate"><span class="pre">Audio.length</span></code></a></li>
+<li><a class="reference internal" href="#sonicdb.audio.Audio.metadata"><code class="docutils literal notranslate"><span class="pre">Audio.metadata</span></code></a></li>
+<li><a class="reference internal" href="#sonicdb.audio.Audio.extension"><code class="docutils literal notranslate"><span class="pre">Audio.extension</span></code></a></li>
+<li><a class="reference internal" href="#sonicdb.audio.Audio.data"><code class="docutils literal notranslate"><span class="pre">Audio.data</span></code></a></li>
+<li><a class="reference internal" href="#sonicdb.audio.Audio.start"><code class="docutils literal notranslate"><span class="pre">Audio.start</span></code></a></li>
+<li><a class="reference internal" href="#sonicdb.audio.Audio.end"><code class="docutils literal notranslate"><span class="pre">Audio.end</span></code></a></li>
+<li><a class="reference internal" href="#sonicdb.audio.Audio.add_data"><code class="docutils literal notranslate"><span class="pre">Audio.add_data()</span></code></a></li>
+<li><a class="reference internal" href="#sonicdb.audio.Audio.bandpass_filter"><code class="docutils literal notranslate"><span class="pre">Audio.bandpass_filter()</span></code></a></li>
+<li><a class="reference internal" href="#sonicdb.audio.Audio.envelope"><code class="docutils literal notranslate"><span class="pre">Audio.envelope()</span></code></a></li>
+<li><a class="reference internal" href="#sonicdb.audio.Audio.fade_in"><code class="docutils literal notranslate"><span class="pre">Audio.fade_in()</span></code></a></li>
+<li><a class="reference internal" href="#sonicdb.audio.Audio.fade_out"><code class="docutils literal notranslate"><span class="pre">Audio.fade_out()</span></code></a></li>
+<li><a class="reference internal" href="#sonicdb.audio.Audio.highpass_filter"><code class="docutils literal notranslate"><span class="pre">Audio.highpass_filter()</span></code></a></li>
+<li><a class="reference internal" href="#sonicdb.audio.Audio.lowpass_filter"><code class="docutils literal notranslate"><span class="pre">Audio.lowpass_filter()</span></code></a></li>
+<li><a class="reference internal" href="#sonicdb.audio.Audio.plot_envelope"><code class="docutils literal notranslate"><span class="pre">Audio.plot_envelope()</span></code></a></li>
+<li><a class="reference internal" href="#sonicdb.audio.Audio.plot_melspectrogram"><code class="docutils literal notranslate"><span class="pre">Audio.plot_melspectrogram()</span></code></a></li>
+<li><a class="reference internal" href="#sonicdb.audio.Audio.plot_psd"><code class="docutils literal notranslate"><span class="pre">Audio.plot_psd()</span></code></a></li>
+<li><a class="reference internal" href="#sonicdb.audio.Audio.plot_spectrogram"><code class="docutils literal notranslate"><span class="pre">Audio.plot_spectrogram()</span></code></a></li>
+<li><a class="reference internal" href="#sonicdb.audio.Audio.plot_waveform"><code class="docutils literal notranslate"><span class="pre">Audio.plot_waveform()</span></code></a></li>
+<li><a class="reference internal" href="#sonicdb.audio.Audio.psd"><code class="docutils literal notranslate"><span class="pre">Audio.psd()</span></code></a></li>
+<li><a class="reference internal" href="#sonicdb.audio.Audio.resample"><code class="docutils literal notranslate"><span class="pre">Audio.resample()</span></code></a></li>
+<li><a class="reference internal" href="#sonicdb.audio.Audio.spectrogram"><code class="docutils literal notranslate"><span class="pre">Audio.spectrogram()</span></code></a></li>
+<li><a class="reference internal" href="#sonicdb.audio.Audio.trim"><code class="docutils literal notranslate"><span class="pre">Audio.trim()</span></code></a></li>
+<li><a class="reference internal" href="#sonicdb.audio.Audio.write_audio"><code class="docutils literal notranslate"><span class="pre">Audio.write_audio()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#sonicdb.audio.autocorrelation"><code class="docutils literal notranslate"><span class="pre">autocorrelation()</span></code></a></li>
+<li><a class="reference internal" href="#sonicdb.audio.average_hold"><code class="docutils literal notranslate"><span class="pre">average_hold()</span></code></a></li>
+<li><a class="reference internal" href="#sonicdb.audio.butter_bandpass"><code class="docutils literal notranslate"><span class="pre">butter_bandpass()</span></code></a></li>
+<li><a class="reference internal" href="#sonicdb.audio.butter_bandpass_filter"><code class="docutils literal notranslate"><span class="pre">butter_bandpass_filter()</span></code></a></li>
+<li><a class="reference internal" href="#sonicdb.audio.butter_highpass"><code class="docutils literal notranslate"><span class="pre">butter_highpass()</span></code></a></li>
+<li><a class="reference internal" href="#sonicdb.audio.butter_highpass_filter"><code class="docutils literal notranslate"><span class="pre">butter_highpass_filter()</span></code></a></li>
+<li><a class="reference internal" href="#sonicdb.audio.butter_lowpass"><code class="docutils literal notranslate"><span class="pre">butter_lowpass()</span></code></a></li>
+<li><a class="reference internal" href="#sonicdb.audio.butter_lowpass_filter"><code class="docutils literal notranslate"><span class="pre">butter_lowpass_filter()</span></code></a></li>
+<li><a class="reference internal" href="#sonicdb.audio.combine_audio"><code class="docutils literal notranslate"><span class="pre">combine_audio()</span></code></a></li>
+<li><a class="reference internal" href="#sonicdb.audio.echo"><code class="docutils literal notranslate"><span class="pre">echo()</span></code></a></li>
+<li><a class="reference internal" href="#sonicdb.audio.fade_in"><code class="docutils literal notranslate"><span class="pre">fade_in()</span></code></a></li>
+<li><a class="reference internal" href="#sonicdb.audio.fade_out"><code class="docutils literal notranslate"><span class="pre">fade_out()</span></code></a></li>
+<li><a class="reference internal" href="#sonicdb.audio.mp3_to_wav"><code class="docutils literal notranslate"><span class="pre">mp3_to_wav()</span></code></a></li>
+<li><a class="reference internal" href="#sonicdb.audio.peak_hold"><code class="docutils literal notranslate"><span class="pre">peak_hold()</span></code></a></li>
+<li><a class="reference internal" href="#sonicdb.audio.psd"><code class="docutils literal notranslate"><span class="pre">psd()</span></code></a></li>
+<li><a class="reference internal" href="#sonicdb.audio.psd2"><code class="docutils literal notranslate"><span class="pre">psd2()</span></code></a></li>
+<li><a class="reference internal" href="#sonicdb.audio.spectral_subtraction"><code class="docutils literal notranslate"><span class="pre">spectral_subtraction()</span></code></a></li>
+<li><a class="reference internal" href="#sonicdb.audio.spectrogram"><code class="docutils literal notranslate"><span class="pre">spectrogram()</span></code></a></li>
+<li><a class="reference internal" href="#sonicdb.audio.wavelet_denoise"><code class="docutils literal notranslate"><span class="pre">wavelet_denoise()</span></code></a></li>
+<li><a class="reference internal" href="#sonicdb.audio.write_audio"><code class="docutils literal notranslate"><span class="pre">write_audio()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-sonicdb.models">sonicdb.models module</a></li>
+<li><a class="reference internal" href="#module-sonicdb.sonic">sonicdb.sonic module</a><ul>
+<li><a class="reference internal" href="#sonicdb.sonic.Database"><code class="docutils literal notranslate"><span class="pre">Database</span></code></a><ul>
+<li><a class="reference internal" href="#sonicdb.sonic.Database.get_audio"><code class="docutils literal notranslate"><span class="pre">Database.get_audio()</span></code></a></li>
+<li><a class="reference internal" href="#sonicdb.sonic.Database.get_channel"><code class="docutils literal notranslate"><span class="pre">Database.get_channel()</span></code></a></li>
+<li><a class="reference internal" href="#sonicdb.sonic.Database.get_sensor"><code class="docutils literal notranslate"><span class="pre">Database.get_sensor()</span></code></a></li>
+<li><a class="reference internal" href="#sonicdb.sonic.Database.get_subject"><code class="docutils literal notranslate"><span class="pre">Database.get_subject()</span></code></a></li>
+<li><a class="reference internal" href="#sonicdb.sonic.Database.sample_database"><code class="docutils literal notranslate"><span class="pre">Database.sample_database()</span></code></a></li>
+<li><a class="reference internal" href="#sonicdb.sonic.Database.session"><code class="docutils literal notranslate"><span class="pre">Database.session</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-sonicdb.utilities">sonicdb.utilities module</a><ul>
+<li><a class="reference internal" href="#sonicdb.utilities.lower_keys"><code class="docutils literal notranslate"><span class="pre">lower_keys()</span></code></a></li>
+<li><a class="reference internal" href="#sonicdb.utilities.metadata"><code class="docutils literal notranslate"><span class="pre">metadata()</span></code></a></li>
+<li><a class="reference internal" href="#sonicdb.utilities.metadatas"><code class="docutils literal notranslate"><span class="pre">metadatas()</span></code></a></li>
+<li><a class="reference internal" href="#sonicdb.utilities.read_datetime"><code class="docutils literal notranslate"><span class="pre">read_datetime()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-sonicdb">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/furo.js?v=5fa4622c"></script>
+    </body>
+</html>

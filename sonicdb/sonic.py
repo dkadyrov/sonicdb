@@ -1,5 +1,3 @@
-# type: ignore
-
 import pathlib
 
 import librosa
@@ -9,10 +7,10 @@ from sqlalchemy.orm import sessionmaker, scoped_session
 from sqlalchemy_utils import database_exists
 
 from sonicdb import audio
-from sonicdb.models import Base, Channel, Sensor, Event, Subject, File
+from sonicdb.models import Base, Channel, Sensor, Event, Subject, File, Sample
 from sonicdb import utilities
 
-from datetime import datetime
+from datetime import datetime, timedelta
 
 
 class Database:  # pragma: no cover
@@ -159,18 +157,16 @@ class Database:  # pragma: no cover
 
         return a
 
-    def get_sensor(
-        self, sensor: Sensor | int | dict[str, int] | str
-    ) -> Sensor | None: 
+    def get_sensor(self, sensor: Sensor | int | dict[str, int] | str) -> Sensor | None:
         """
         Get a sensor from the database.
 
         Args:
             sensor (Sensor | int | dict[str, int] | str): Sensor object, sensor ID, or sensor name.
-                If a dictionary is passed, it should contain the keys "name" and "subname". 
-        
+                If a dictionary is passed, it should contain the keys "name" and "subname".
+
         Returns:
-            Sensor | None: Sensor object if found, None otherwise.         
+            Sensor | None: Sensor object if found, None otherwise.
         """
         if isinstance(sensor, Sensor):
             return sensor
@@ -274,5 +270,50 @@ class Database:  # pragma: no cover
         return c[0]
 
     # TODO Add sample support
+    def sample_database(
+        self,
+        duration: int = 60,
+        overlap: int = 0,
+        events_only: bool = False,
+        to_file: bool = False,
+    ) -> None:
+        """
+        Populates the sample table with the audio data segmented by the specified duration and overlap.
 
-    # TODO Add resample support
+        Args:
+            duration (int, optional): Duration of each sample in seconds. Defaults to 60.
+            overlap (int, optional): Overlap between samples in seconds. Defaults to 0.
+        """
+        self.session.sample_duration = duration
+        self.session.sample_overlap = overlap
+
+        files = self.session.query(File).all()
+        for file in files:
+            start = file.start
+
+            event = (
+                self.session.query(Event)
+                .filter(Event.start <= start)
+                .filter(Event.end >= start)
+                .first()
+            )
+
+            if event is None:
+                subject = None
+            else:
+                subject = event.subject
+
+            while start < file.end:
+                sample = Sample(
+                    datetime=start,
+                    event=event,
+                    sensor=file.sensor,
+                    channel=file.channel,
+                    subject=subject,
+                    file=file,
+                )
+                self.session.add(sample)
+
+                start += timedelta(
+                    seconds=self.session.sample_duration - self.session.sample_overlap
+                )

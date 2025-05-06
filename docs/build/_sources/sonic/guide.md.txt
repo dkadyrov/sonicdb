@@ -84,15 +84,3 @@ The Sample model represents audio samples extracted from the files.
 | file_id | Integer | Foreign key referencing the File model |
 | sensor_id | Integer | Foreign key referencing the Sensor model |
 | channel_id | Integer | Foreign key referencing the Channel model |
-
-### Classification
-
-The Classification model represents the classification results for audio samples.
-
-| Column | Type | Description |
-| --- | --- | --- |
-| id | Integer | Primary key |
-| sample_id | Integer | Foreign key referencing the Sample model |
-| classification | String | Classification label |
-| classifier | String | Name of the classifier used |
-| datetime | DateTime | Timestamp of the classification |

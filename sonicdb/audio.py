@@ -1141,7 +1141,7 @@ def echo(data,  sample_rate, delay=0.1, decay=0.5):
 
 
     delay_samples = int(sample_rate * delay)
-    decay_samples = int(sample_rate * decay)
+    # decay_samples = int(sample_rate * decay)
     echo = np.zeros(len(data) + delay_samples)
     echo[delay_samples:] = data * decay
     echo[: len(data)] += data

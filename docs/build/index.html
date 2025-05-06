@@ -3,13 +3,14 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="SONIC" href="guide.html" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Getting Started" href="getting_started.html" />
 
     <!-- Generated with Sphinx 8.2.3 and Furo 2024.08.06 -->
         <title>SONICDB documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=302659d7" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=40c75f68" />
     
     
 
@@ -198,9 +199,15 @@
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  <ul>
-<li class="toctree-l1"><a class="reference internal" href="guide.html">SONIC</a></li>
+  <p class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sonic.html">SONIC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="audio.html">Audio</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="sonicdb.html">SONIC API</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of SONIC API</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="sonicdb.database.html">sonicdb.database package</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference external" href="https://github.com/dkadyrov/sonicdb/releases">Changelog</a></li>
 </ul>
 
@@ -242,45 +249,18 @@
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <section id="sonicdb">
-<h1>SONICDB<a class="headerlink" href="#sonicdb" title="Link to this heading">¶</a></h1>
-<div class="toctree-wrapper compound">
+          <div class="toctree-wrapper compound">
 </div>
 <section id="about">
-<h2>About<a class="headerlink" href="#about" title="Link to this heading">¶</a></h2>
-<p>The Sound Organization and Network Integration for Collection/Collaboration (SONIC) Python package leverages relational database management systems to store and manage acoustic data and its associated metadata.</p>
+<h1>About<a class="headerlink" href="#about" title="Link to this heading">¶</a></h1>
+<p>The Sound Organization and Network Integration for Collection/Collaboration Database (SONICDB) Python package leverages relational database management systems to store and manage acoustic data and its associated metadata.</p>
 <p>It was developed to address the lack of a standardized method of organizing audio files for research purposes, especially in the context of algorithm development and machine learning.</p>
 <p>The package is designed to be flexible and extendable, allowing users to retrofit it to their use cases while maintaining foundational models and methods for managing audio data. It uses widely used standard libraries including SQLAlchemy, Pandas, Numpy, and Librosa. Currently it emphasizes using SQLite as the database backend, but it can be extended to use other relational database management systems.</p>
-</section>
-<section id="usage">
-<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading">¶</a></h2>
-<section id="requirements">
-<h3>Requirements<a class="headerlink" href="#requirements" title="Link to this heading">¶</a></h3>
-<p>The SONICDB Python package requires Python 3.12 or later. It also depends on the following packages:</p>
+<p>This package has been used to manage the following datasets:</p>
 <ul class="simple">
-<li><p>SQLAlchemy</p></li>
-<li><p>Pandas</p></li>
-<li><p>Numpy</p></li>
-<li><p>Librosa</p></li>
-<li><p>Pydub</p></li>
-<li><p>SQLAlchemy-Utils</p></li>
-<li><p>Soundfile</p></li>
-<li><p>Scipy</p></li>
-<li><p>Matplotlib</p></li>
+<li><p><a class="reference external" href="https://github.com/dkadyrov/spidb">Stored Product Insect Detection Database (SPIDB)</a></p></li>
+<li><p>Drone Acoustic Dataset (DAD)</p></li>
 </ul>
-</section>
-<section id="installation">
-<h3>Installation<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h3>
-<p>SONICDB is available on PyPi and can be installed using pip:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>sonicdb
-</pre></div>
-</div>
-</section>
-<section id="documentation">
-<h3>Documentation<a class="headerlink" href="#documentation" title="Link to this heading">¶</a></h3>
-<p>The documentation for the SONIC Python package can be found <a class="reference internal" href="#/guide/guide"><span class="xref myst">here</span></a>.</p>
-</section>
-</section>
 </section>
 
         </article>
@@ -288,12 +268,12 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="guide.html">
+          <a class="next-page" href="getting_started.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">SONIC</div>
+                <div class="title">Getting Started</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>

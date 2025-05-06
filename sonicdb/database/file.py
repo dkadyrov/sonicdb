@@ -14,76 +14,96 @@ from sonicdb import audio
 
 
 class File(Base):  # type: ignore # pragma: no cover
-    """File object"""
+    """
+    Represents an audio file in the database.
+
+    Attributes:
+        id (int): Unique identifier for the file.
+        filepath (str): Path to the file on the filesystem.
+        filename (str): Name of the file.
+        extension (str): File extension (e.g., '.wav').
+        sample_rate (int): Sampling rate of the audio file in Hz.
+        start (datetime): Start time of the audio file.
+        end (datetime): End time of the audio file.
+        duration (float): Duration of the audio file in seconds.
+        channel_number (int): Channel number associated with the file.
+        channel_id (int): Foreign key referencing the associated channel.
+        channel (Channel): Relationship to the Channel object.
+        sensor_id (int): Foreign key referencing the associated sensor.
+        sensor (Sensor): Relationship to the Sensor object.
+        samples (list): List of Sample objects generated from the file.
+    """
 
     __tablename__ = "file"
     id = Column(Integer, primary_key=True)
-    """int: File database ID"""
+    """int: Unique identifier for the file in the database."""
 
     filepath = Column(String)
-    """str: filepath of file"""
+    """str: Path to the file on the filesystem."""
 
     filename = Column(String)
-    """str: filename of file"""
+    """str: Name of the file."""
 
     extension = Column(String)
-    """str: extension of file"""
+    """str: File extension (e.g., '.wav')."""
 
     sample_rate = Column(Integer)
-    """int: sample rate of file"""
+    """int: Sampling rate of the audio file in Hz."""
 
     start = Column(DateTime)
-    """datetime: start of file"""
+    """datetime: Start time of the audio file."""
 
     end = Column(DateTime)
-    """datetime: end of file"""
+    """datetime: End time of the audio file."""
 
     duration = Column(Float)
-    """float: duration of file in seconds"""
+    """float: Duration of the audio file in seconds."""
 
     channel_number = Column(Integer)
+    """int: Channel number associated with the file."""
 
     channel_id = Column(Integer, ForeignKey("channel.id"))
-    """int: Channel database ID"""
+    """int: Foreign key referencing the associated channel."""
 
     channel = relationship(
         "sonicdb.database.channel.Channel",
         back_populates="files",
         enable_typechecks=False,
     )
-    """Channel: Channel object"""
+    """Channel: Relationship to the Channel object."""
 
     sensor_id = Column(Integer, ForeignKey("sensor.id"))
-    """int: Sensor database ID"""
+    """int: Foreign key referencing the associated sensor."""
 
     sensor = relationship(
         "sonicdb.database.sensor.Sensor", back_populates="files", enable_typechecks=False
     )
-    """Sensor: Sensor object"""
+    """Sensor: Relationship to the Sensor object."""
 
     samples = relationship(
         "sonicdb.database.sample.Sample", back_populates="file", enable_typechecks=False
     )
-    """list: list of samples generated from the file"""
+    """list: List of Sample objects generated from the file."""
 
     __mapper_args__ = {
         "polymorphic_identity": "file",
     }
 
     def __repr__(self) -> str:  # pragma: no cover
-        """Returns object representation"""
+        """
+        Returns a string representation of the File object.
 
+        Returns:
+            str: A string in the format 'File <id>: <filename>'.
+        """
         return f"File {self.id}: {self.filename}"
 
     def get_audio(self) -> audio.Audio:  # type: ignore # pragma: no cover
-        """Returns audio of file with a specified offset in seconds and duration in seconds
+        """
+        Retrieves the audio data for the file.
 
-        :param offset: start delay in recording (in seconds), defaults to None
-        :type offset: int or float, optional
-        :param duration: length of audio output (in seconds), defaults to None
-        :type duration: int or float, optional
-        :return: audio
-        :rtype: numpy.array
+        Returns:
+            audio.Audio: An Audio object containing the audio data.
         """
         session = Session.object_session(self)
         directory = session.directory

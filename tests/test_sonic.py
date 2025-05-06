@@ -1,15 +1,10 @@
 import os
-
-import pytest
-import numpy as np
-import pandas as pd
 from datetime import timedelta
-from sonicdb import sonic, models, audio
+
+from sonicdb import audio, models, sonic
 
 
-# @pytest.fixture(scope="module")
 def test_database():
-
     if os.path.exists("examples/example.db"):
         os.remove("examples/example.db")
 
@@ -51,7 +46,6 @@ def test_database():
     db.session.add(event)
     db.session.commit()
 
-    word = "SONIC"
     for i in range(5):
         sample = models.Sample(
             datetime=file.start + timedelta(seconds=float(i * file.duration / 5)),
@@ -61,10 +55,6 @@ def test_database():
             file=file,
         )
         db.session.add(sample)
-        db.session.commit() 
-
-        classification = models.Classification(sample=sample, classification=word[i], sensor=sample.sensor, classifier="test_classifier", datetime=sample.datetime)
-        db.session.add(classification)
         db.session.commit()
 
     db.session.commit()
@@ -106,7 +96,6 @@ def test_database():
     db.session.close()
     db.engine.dispose()
 
-    # delete database file
     os.remove("examples/example.db")
 
 

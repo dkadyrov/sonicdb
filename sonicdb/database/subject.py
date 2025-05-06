@@ -7,27 +7,34 @@ from .base import Base
 
 
 class Subject(Base):  # type: ignore
-    """Subject object"""
+    """
+    Represents a subject in the database.
+
+    Attributes:
+        id (int): Unique identifier for the subject.
+        name (str): Name of the subject.
+        samples (list): List of Sample objects featuring the subject.
+        events (list): List of Event objects featuring the subject.
+    """
 
     __tablename__ = "subject"
     id = Column(Integer, primary_key=True)
-    """int: Subject object database ID"""
+    """int: Unique identifier for the subject."""
 
     name = Column(String)
-    """str: Subject name"""
+    """str: Name of the subject."""
 
     samples = relationship(
         "sonicdb.database.sample.Sample",
         back_populates="subject",
         enable_typechecks=False,
     )
-    """list: list of Sample objects featuring the subject"""
+    """list: List of Sample objects featuring the subject."""
 
-    # events = relationship("sonicdb.database.event.EventSubject", back_populates="subject", enable_typechecks=False)
     events = relationship(
         "sonicdb.database.event.Event", back_populates="subject", enable_typechecks=False
     )
-    """list: list of Run objects featuring the subject"""
+    """list: List of Event objects featuring the subject."""
 
     __mapper_args__ = {"polymorphic_identity": "subject"}
 

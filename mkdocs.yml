@@ -1,0 +1,17 @@
+site_name: SonicDB Documentation
+
+nav:
+  - About: index.md
+  - Getting Started: getting_started.md
+  - SONICDB Reference: sonicdb_reference.md
+  - Audio Reference: audio_reference.md
+  - API Reference:
+      - Module 1: autodoc/module1.md
+      - Module 2: autodoc/module2.md
+      # Add more modules as needed
+  - Examples: examples.md
+
+plugins:
+  - autodoc:
+      output_dir: autodoc
+      # Configure autodoc settings as needed
